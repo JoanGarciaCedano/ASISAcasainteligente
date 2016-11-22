@@ -3,7 +3,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ASISA Smart House</title>
+    <title>ASISA Control de casa inteligente</title>
 
     <!-- Bootstrap desde la NUBE-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" 
@@ -19,197 +19,6 @@
    <script src="http://code.highcharts.com/stock/highstock.js"></script>
    <script src="http://code.highcharts.com/modules/exporting.js"></script>
 
-  
-
-   <style>
-     html, body{
-	font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-	color: #676a6c;
-	height: 100%;}
-
-	#side-menu{
-		background-color: #2f4050;
-		padding: 0px;}
-	
-	#side-menu h1{
-		color: #fff;
-		text-align: center;
-		margin: 10px 0px;
-		font-size: 25px;}
-	
-	#side-menu h1 a {
-	    display: inline-block;
-	    border: 1px solid #ddd;
-	    border-radius: 4px;
-	    padding: 5px;
-	    transition: 0.3s;}
-	
-	#side-menu ul{
-		list-style: none;
-		margin: 0px;
-		padding: 0px;}
-	
-	#side-menu a{
-		padding: 12px 20px;
-		text-decoration: none;
-		color: #9fb1c2;
-		font-weight: bold;
-		font-size: 13px;
-		display: block;}
-	
-	#side-menu .glyphicon{
-		margin-right: 6px;}
-	
-	#side-menu a:hover{
-		background-color: #293846;
-		color: #fff;
-		display: block;}
-	
-	#side-menu .active a{
-		color: #fff;
-		background-color: #293846;}
-	
-	#side-menu .settings-btn{
-		background-color: #1ab394;}
-	
-	#side-menu .settings-btn a{
-		color: #fff;}
-	
-	#side-menu .settings-btn a:hover{
-		background-color: #1ab394;}
-	
-	#sie-menu .collapsable li{
-		padding-left: 20px;
-		padding-top: 5px;}
-	
-	#side-menu .collapsable a{
-		color: #9fb1c2;
-		font-size: 12px;
-		padding: 0px 10px;
-		text-decoration: none;
-		display: block;}
-	
-	#side-menu .collapsable a:hover{
-		color: #fff;}
-	
-	#side-menu .collapsable{
-		border-left: 4px solid #1ab394;
-		background-color: #293846;}
-	
-	#side-menu .link > ul > li{
-		padding-bottom: 10px;}
-	
-	.display-table{
-		display: table;
-		padding: 0px;
-		height: 100%;
-		width: 100%;}
-	
-	.display-table-row{
-		display: table-row;
-		height: 100%;}
-	
-	.display-table-cell{
-		display: table-cell;
-		float: none;
-		height: 100%;}
-	
-	.valign-top{
-		vertical-align: top;}
-	
-	#nav-header{
-		background-color: #fff;
-		border-bottom: ipx solid #e7eaec;}
-	
-	#nav-header #header-search-field{
-		padding-top: 17px;
-		vertical-align: center;
-		border: none;
-		width: 300px;
-		outline: none;}
-	
-	#nav-header ul{
-		margin: 0px;
-		padding: 0px;
-		list-style: none;
-		color: #676a6c;}
-	
-	#nav-header ul li{
-		float: left;
-		margin-left: 15px;
-		padding: 17px 0px;}
-	
-	#nav-header ul .glyphicon {
-		color: #1ab394;}
-	
-	.label-message{
-		background-color: #1ab394;}
-	
-	#nav-header ul a{
-		text-decoration: none;}
-	
-	#nav-header .logout{
-		color: #fff;}
-	
-	#nav-header .logout:hover{
-		color: #fff;}
-	
-	#nav-header #welcome{
-		text-align: center;
-		color: #fff;}
-	
-	#nav-header ul .label{
-		position: absolute;
-		margin-top: -10px;
-		margin-left: -5px;}
-	
-	#nav-header ul .fixed-width{
-		width: 35px;}
-	
-	#admin-footer{
-		position: absolute;
-		width: 100%;
-		bottom: 0px;
-		background-color: #fff;
-		padding: 10px;
-		font-size: 12px;
-		color: #676a6c;}
-	
-	.navbar-default{
-		background-color: #2f4050;}
-	
-	.navbar-default .navbar-toggle{
-		border-color: #1ab394;
-		background-color: #1ab394;}
-	
-	.navbar-default .icon-bar{
-		border: 1px white solid;}
-	
-	.navbar-default .navbar-toggle:hover{
-		background-color: #1ab394;}
-	
-	.navbar-default .navbar-toggle:focus{
-		background-color: #1ab394;}
-	
-	#content {
-		margin: 20px 0px 50px 0px;
-		background-color: #fff;
-		border-top: #e7eaec;}
-	
-	#content header{
-		border-bottom: 1px #f3f3f4 solid;
-		padding: 10px 0px;}
-	
-	.page_title{
-		font-size: 14px;
-		font-weight: bold;
-		padding: 0px 0px 0px 20px;
-		margin: 0px;}
-	
-	.content-inner{
-		padding: 20px;}
-    </style>
-
   </head>
 
   <body>
@@ -218,6 +27,9 @@
         <!--side menu -->
           <div class="col-md-2 col-sm-2 hidden-xs display-table-cell valign-top" id="side-menu">
     	    <ul>
+		
+	      <hr>
+
     	      <li class="link active">
     	        <a href="index.html">
 		  <span aria-hidden="true"></span>
@@ -225,10 +37,12 @@
     		</a>
     	      </li>
    		
+	      <hr>	
+	
     	      <li class="link">
     	        <a href="#collapse-post" data-toggle="collapse" aria-controls="collapse-post">
     		  <span aria-hidden="true"></span>
-    		  <span class="hidden-xs hidden-sm">Monitoreo Raspberry</span>
+    		  <span class="hidden-xs hidden-sm">Monitorèo Raspberry</span>
     		</a>
     	        <ul class="collapse collapsable" id="collapse-post">
 	          <li>
@@ -239,6 +53,8 @@
 	    	  </li>
     	        </ul>
               </li>
+
+	       <hr>
 
     	      <li class="link">
     	        <a href="#collapse-comments" data-toggle="collapse" aria-controls="collapse-comments">
@@ -256,6 +72,8 @@
     		</ul>
     	      </li>
 
+               <hr>
+
     	      <li class="link">
     	        <a href="#collapse-controlcasa" data-toggle="collapse" aria-controls="collapse-controlcasa">
     		  <span aria-hidden="true"></span>
@@ -271,13 +89,9 @@
 	    	  </li>
     		</ul>
     	      </li>
-    			
-    	      <li class="link settings-btn">
-    	        <a href="configuracion.html">
-    		  <span aria-hidden="true"></span>
-    		  <span class="hidden-xs hidden-sm">Configuración</span>
-    		</a>
-    	      </li>
+    		
+               <hr>  
+	
     	    </ul>
           </div>
     		
@@ -297,7 +111,7 @@
                   </nav>
 
 	        <div class="col-md-11">
-	  		<center><h1>Bienvenido al sistema de administración del hogar de ASISA</h1></center>
+	  		<center><h1>D A S H B O A R D</h1></center>
 	    	</div>
 
 	    	<div class="col-md-1">
@@ -311,8 +125,6 @@
 		<hr>
 	    </div>	
 	
-        	<center><h1>DASHBOARD</h1></center>
-
 		<!--CONTENIDO DE LOS COMPONENTES-->
 	 
 					  <div class="row">
@@ -320,11 +132,11 @@
 					        <div class="panel panel-primary">
 					          <div class="panel-heading">Información General</div>
 					          <div class="panel-body">
-						    <p  id="p_hostname">Info de la rasp</p>
+						    <p  id="p_hostname">Informaciòn de la Raspberry Pi 3</p>
 					            <p  id="p_kernel"></p>
-					            <p  id="p_uptime"></p>
+					            <p  id="p_uptime">Tiempo de encendido</p>
 					            <div>
-					                <b>Procesos Top:</b>
+					                <b>Lista de procesos:</b>
 					                <ol id="toplist">
 					                </ol>
 					            </div>
@@ -375,7 +187,7 @@
 	      </div>
 
 	      <div class="pull-right">
-	        <b>Isaac y Joan</b>
+	        <b>Grupo CCred</b>
 	      </div>
 	    </footer>
         </div>
@@ -492,7 +304,7 @@
             selected : 100
         },
         title: {
-            text: 'Humedad de la casita'
+            text: 'Humedad de la casa'
         },
         xAxis: {
             type: 'datetime',
@@ -503,7 +315,7 @@
             minPadding: 0.2,
             maxPadding: 0.2,
             title: {
-                text: 'Humedad de la Jaus',
+                text: 'Humedad de la casa',
                 margin: 10
             }
         },
@@ -534,7 +346,7 @@
             selected : 100
         },
         title: {
-            text: 'Temperatura de la Casa'
+            text: 'Temperatura de la casa'
         },
         xAxis: {
             type: 'datetime',
@@ -545,7 +357,7 @@
             minPadding: 0.2,
             maxPadding: 0.2,
             title: {
-                text: 'Temperatura de la Jaus',
+                text: 'Temperatura de la casa',
                 margin: 10
             }
         },
@@ -623,13 +435,13 @@ chartMem = new Highcharts.Chart({
         });
 
         socket.on('hostname', function (hname) {
-          document.getElementById("p_hostname").innerHTML="<b>Nombre de la rasp:</b> "+hname;
+          document.getElementById("p_hostname").innerHTML="<b>Nombre de la Raspberry Pi 3:</b> "+hname;
         });
         socket.on('kernel', function (ker) {
           document.getElementById("p_kernel").innerHTML="<b>Kernel:</b> "+ker;
         });
         socket.on('uptime', function (uptime) {
-          document.getElementById("p_uptime").innerHTML="<b>Up time:</b> "+ uptime;
+          document.getElementById("p_uptime").innerHTML="<b>Tiempo de encendido:</b> "+ uptime;
         });
         socket.on('toplist', function (toplist) {
             var res = toplist.split("\n");

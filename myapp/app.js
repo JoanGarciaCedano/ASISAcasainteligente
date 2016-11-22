@@ -97,6 +97,8 @@ var sock;
 var GPIOS = require('onoff').Gpio;
 var relay1 = new GPIOS(17, 'out');
 var relay2 = new GPIOS(18, 'out');
+var relay3 = new GPIOS(19, 'out');
+var relay4 = new GPIOS(20, 'out');
 
 
 /*function handler (req, res) {
@@ -146,6 +148,32 @@ io.sockets.on('connection', function(socket) {
  
     }else{
         relay2.writeSync(0);
+        socket.emit('ledstatus', 'red');
+    }
+  });
+
+//usa GPIO 19 para encender/apagar relay 1
+  socket.on('relay3', function (data) {
+    console.log(data);
+    if (data == 'on'){
+          relay3.writeSync(1);
+          socket.emit('ledstatus', 'green');
+ 
+    }else{
+        relay3.writeSync(0);
+        socket.emit('ledstatus', 'red');
+    }
+  });
+
+  //usa GPIO 20 para encender/apagar relay 2
+  socket.on('relay4', function (data) {
+    console.log(data);
+    if (data == 'on'){
+          relay4.writeSync(1);
+          socket.emit('ledstatus', 'green');
+ 
+    }else{
+        relay4.writeSync(0);
         socket.emit('ledstatus', 'red');
     }
   });

@@ -24,14 +24,14 @@
 
     <script>
         var socket = io.connect();
-        socket.on('statusRelay1', function (value) {
+        socket.on('relay3', function (value) {
           if(value == 1){
             document.getElementById("estado1").innerHTML = "Encendida";
           }else{
             document.getElementById("estado1").innerHTML = "Apagada";
           }
         });
-        socket.on('statusRelay2', function (value) {
+        socket.on('statusRelay4', function (value) {
           if(value ==1){
             document.getElementById("estado2").innerHTML = "Encendida";
           }else{
@@ -41,21 +41,21 @@
     </script>
 
     <script>
-    function relay1On(){
-      socket.emit('relay1', 'on');
+    function relay3On(){
+      socket.emit('relay3', 'on');
        	document.getElementById("estado1").innerHTML = "Encendida";
     }
-    function relay1Off(){
-      socket.emit('relay1', 'off');
-	document.getElementById("estado1").innerHTML = "Apagada";
+    function relay3Off(){
+      socket.emit('relay3', 'off');
+	     document.getElementById("estado1").innerHTML = "Apagada";
     }
-    function relay2On(){
-      socket.emit('relay2', 'on');
-	document.getElementById("estado2").innerHTML = "Encendida";
+    function relay4On(){
+      socket.emit('relay4', 'on');
+	    document.getElementById("estado2").innerHTML = "Encendida";
     }
-    function relay2Off(){
-      socket.emit('relay2', 'off');
-	document.getElementById("estado2").innerHTML = "Apagada";
+    function relay4Off(){
+      socket.emit('relay4', 'off');
+	    document.getElementById("estado2").innerHTML = "Apagada";
     }
     </script>
 
@@ -146,7 +146,7 @@
       	    	    </nav>
 
                 <div class="col-md-11">
-                        <center><h1>Control de Iluminaciòn del Hogar</h1></center>
+                        <center><h1>Control de Bombas de Agua del Hogar</h1></center>
                 </div>
 
                 <div class="col-md-1">
@@ -161,26 +161,26 @@
             </div>
 
 	     <div class="row">
-		<center><h4>Linea de Iluminaciòn 1</h4></center>
+		<center><h4>Bomba de Agua del Tinaco</h4></center>
 		<center><h4 id="estado1">Estado</h4></center>
 	    </div>
  	    <div class="row">
 		<div class="jumbotron" id="jumbo1">
-	      	  <center><input class="btn btn-success btn-lg" type="button" name="on" id="onButton" value="Prender" onClick="relay1On();">
-	     	  <input class="btn btn-danger btn-lg" type="button" name="on" id="offButton" value="Apagar" onClick="relay1Off();"></center>
+	      	  <center><input class="btn btn-success btn-lg" type="button" name="on" id="onButton" value="Prender" onClick="relay3On();">
+	     	  <input class="btn btn-danger btn-lg" type="button" name="on" id="offButton" value="Apagar" onClick="relay3Off();"></center>
             	</div>
 	    </div>
 
 	    <hr>
 
 	     <div class="row">
-		<center><h4>Linea de Iluminaciòn 2</h4></center>
+		<center><h4>Bomba de Agua de la Alberca</h4></center>
 		<center><h4 id="estado2">Estado</h4></center>
 	    </div>
 	    <div class="row">
 	      <div class="jumbotron" id="jumbo2">
-	        <center><input class="btn btn-success btn-lg" type="button" name="on" id="onButton" value="Prender" onClick="relay2On();">
-	        <input class="btn btn-danger btn-lg" type="button" name="on" id="offButton" value="Apagar" onClick="relay2Off();"></center>
+	        <center><input class="btn btn-success btn-lg" type="button" name="on" id="onButton" value="Prender" onClick="relay4On();">
+	        <input class="btn btn-danger btn-lg" type="button" name="on" id="offButton" value="Apagar" onClick="relay4Off();"></center>
 	      </div>
             </div>
 
@@ -190,7 +190,7 @@
 	    </div>
 
 	    <div class="pull-right">
-	      <b>Isaac y Joan</b>
+	      <b>Grupo CCred</b>
 	    </div>
 	  </footer>
 	 </div>
@@ -212,4 +212,3 @@
     <script src="javascripts/panelScript.js"></script>
   </body>
 </html>
-
