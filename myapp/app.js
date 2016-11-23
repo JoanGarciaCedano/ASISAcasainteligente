@@ -310,7 +310,6 @@ io.sockets.on('connection', function(socket) {
 	    }
 	  });}, 5000);
 
-
 // Humidity
 setInterval(function(){
 var sensor = {
@@ -334,6 +333,7 @@ var sensor = {
 sensor.read();
 }, 2000);
 
+/*COMENTADO PARA PRUEBAS
 setInterval(function(){
   gpio.setup(10, gpio.DIR_IN, readInput);
 
@@ -344,6 +344,7 @@ setInterval(function(){
     });
   }
 }, 2000);
+*/
 
 });
 
