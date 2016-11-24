@@ -22,7 +22,7 @@ MongoClient.connect(url, function(err, db){
 });
 
 //Funciòn para insertar la collection a la Base de Datos -- YA INSERTADOS
-
+/*
 var insertarDocumento = function(db, callback) {
    db.collection('raspberry').insertOne( {
 		 "datosRaspBerry" : {
@@ -48,6 +48,7 @@ MongoClient.connect(url, function(err, db) {
       db.close();
   });
 });
+*/
 
 /*
 var removerBD = function(db, callback) {
@@ -156,22 +157,56 @@ io.sockets.on('connection', function(socket) {
   var memTotal, memUsed = 0, memFree = 0, memBuffered = 0, memCached = 0, sendData = 1, percentBuffered, percentCached, percentUsed, percentFree;
   var address = socket.handshake.address;
 
-  console.log("Nueva conexion desde:" + address);
+//Variables para almacenar valor de relays
+	var valRelay1 = 0, valRelay2 = 0, valRelay3 = 0, valRelay4 = 0;
+
+	console.log("Nueva conexion desde:" + address);
 
 
   sock = socket;
 
+//Funcion para recuperar los valores de los Relays almacenados en la base de datos
+//Posteriormente se emiten por socket.io a las vistas para cambiar los labels
+/*var mandarRelay = function(db, callback){
+var cursor =db.collection('raspberry').find();
+
+cursor.each(function(err, doc) {
+assert.equal(err, null);
+if (doc != null) {
+socket.emit('statusRelay1', doc.statusCasa.relay1);
+socket.emit('statusRelay2', doc.statusCasa.relay2);
+socket.emit('statusRelay3', doc.statusCasa.relay3);
+socket.emit('statusRelay4', doc.statusCasa.relay4);
+}
+else { callback(); }
+});
+}
+
+MongoClient.connect(url,function(err,db){
+	assert.equal(null, err);
+	mandarRelay(db, function(){
+		db.close();
+	});
+});
+*/
   //usa GPIO 17 para encender/apagar relay 1
   socket.on('relay1', function (data) {
     console.log(data);
     if (data == 'on'){
           relay1.writeSync(1);
-          socket.emit('ledstatus', 'green');
-
+					valRelay1 = 1;
     }else{
-        relay1.writeSync(0);
-        socket.emit('ledstatus', 'red');
-    }
+        	relay1.writeSync(0);
+					valRelay1 = 0;
+		}
+			//Almaceno valRelay1 y muestro
+		  MongoClient.connect(url, function(err, db){
+			assert.equal(null, err);
+			actualizarBASERelay1(db, valRelay1, function(){
+
+			db.close();
+			});
+		});//MongoClient
   });
 
   //usa GPIO 18 para encender/apagar relay 2
@@ -179,38 +214,59 @@ io.sockets.on('connection', function(socket) {
     console.log(data);
     if (data == 'on'){
           relay2.writeSync(1);
-          socket.emit('ledstatus', 'green');
-
+					valRelay2 = 1;
     }else{
-        relay2.writeSync(0);
-        socket.emit('ledstatus', 'red');
-    }
+        	relay2.writeSync(0);
+					valRelay2 = 0;
+		}
+			//Almaceno valRelay2 y muestro
+			MongoClient.connect(url, function(err, db){
+			assert.equal(null, err);
+			actualizarBASERelay2(db, valRelay2, function(){
+
+			db.close();
+			});
+		});//MongoClient
   });
 
-//usa GPIO 19 para encender/apagar relay 1
+//usa GPIO 19 para encender/apagar relay 3
   socket.on('relay3', function (data) {
     console.log(data);
     if (data == 'on'){
           relay3.writeSync(1);
-          socket.emit('ledstatus', 'green');
-
+					valRelay3 = 1;
     }else{
-        relay3.writeSync(0);
-        socket.emit('ledstatus', 'red');
+        	relay3.writeSync(0);
+					valRelay3 = 0;
     }
+			//Almaceno valRelay3 y muestro
+			MongoClient.connect(url, function(err, db){
+			assert.equal(null, err);
+			actualizarBASERelay3(db, valRelay3, function(){
+
+			db.close();
+			});
+		});//MongoClient
   });
 
-  //usa GPIO 20 para encender/apagar relay 2
+  //usa GPIO 20 para encender/apagar relay 4
   socket.on('relay4', function (data) {
     console.log(data);
     if (data == 'on'){
           relay4.writeSync(1);
-          socket.emit('ledstatus', 'green');
-
+					valRelay4 = 1;
     }else{
-        relay4.writeSync(0);
-        socket.emit('ledstatus', 'red');
-    }
+        	relay4.writeSync(0);
+					valRelay4 = 0;
+		}
+			//Almaceno valRelay4 y muestro
+			MongoClient.connect(url, function(err, db){
+			assert.equal(null, err);
+			actualizarBASERelay4(db, valRelay4, function(){
+
+			db.close();
+			});
+		});//MongoClient
   });
 
 
