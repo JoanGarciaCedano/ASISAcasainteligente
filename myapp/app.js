@@ -150,6 +150,29 @@ var relay2 = new GPIOS(18, 'out');
 var relay3 = new GPIOS(19, 'out');
 var relay4 = new GPIOS(20, 'out');
 
+//Funcion para inicializar Relays dependiendo del estado en la BDD
+var estadoRelay = function(db, callback){
+var cursor =db.collection('raspberry').find();
+
+cursor.each(function(err, doc) {
+assert.equal(err, null);
+if (doc != null) {
+relay1.writeSync(doc.statusCasa.relay1);
+relay2.writeSync(doc.statusCasa.relay2);
+relay3.writeSync(doc.statusCasa.relay3);
+relay4.writeSync(doc.statusCasa.relay4);
+}
+else { callback(); }
+});
+}
+
+MongoClient.connect(url,function(err,db){
+	assert.equal(null, err);
+	estadoRelay(db, function(){
+		db.close();
+	});
+});
+
 
 //Cuando abramos el navegador estableceremos una conexión con socket.io.
 //Cada X segundos mandaremos a la gráfica un nuevo valor.
