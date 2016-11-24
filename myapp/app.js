@@ -21,67 +21,30 @@ MongoClient.connect(url, function(err, db){
 	db.close();
 });
 
-//--------------------------------TERMINA MONGO DB
+//Funciòn para insertar la collection a la Base de Datos -- YA INSERTADOS
 
-//ººººººººººººººººººººººººººººººººººººººWebService PRUEBA
-var querystring = require('querystring');
-var cerhttp = require('http');
-
-var host = 'geo.groupkt.com';
-
-function performRequest(endpoint, method, data, success){
-
-var dataString = JSON.stringify(data);
-var headers = {};
-
-if(method == 'GET'){
-	endpoint += '?' + querystring.stringify(data);
-}else{
-	headers = {
-		'Content-Type': 'application/json',
-		'Content-Length': dataString.length
-	};
-}
-
-var options = {
-	host: host,
-	path: endpoint,
-	method: method,
-	headers: headers
+var insertarDocumento = function(db, callback) {
+   db.collection('raspberry').insertOne( {
+      "statusCasa" : {
+	 "relay1" : "",
+   "relay2" : "",
+ 	 "relay3" : "",
+	 "relay4" : ""
+	 },
+	},
+    function(err, result) {
+    assert.equal(err, null);
+    console.log("Se insertaron los documentos dentro de la coleciòn raspberry!!");
+    callback();
+  });
 };
 
-var req = cerhttp.request(options, function(res){
-	res.setEncoding('utf-8');
-	
-	var responseString = '';
-
-	res.on('data', function(data){
-	  responseString += data;
-         });
-	
-	res.on('end', function(){
-	  console.log(responseString);
-	  var responseObject = JSON.parse(responseString);
-	  success(responseObject);
-	});
+MongoClient.connect(url, function(err, db) {
+  assert.equal(null, err);
+  insertarDocumentos(db, function() {
+      db.close();
+  });
 });
-
-req.write(dataString);
-req.end();
-
-}//--------funcion performRequest--------
-
-
-function obtenerDatos(){
-	performRequest('/ip/201.141.11.78/json', 'GET', {
-		"countryIso2": "MX"
-	},function(data){
-		console.log('Resultado: ' + data.result);
-	});
-}//--------funcion obtenerDatos--------
-
-obtenerDatos();
-//ºººººººººººººººººººººººººººººººººººººº
 
 //Agregadas para pruebas--------------------------------->>
 var http = require('http');
@@ -98,7 +61,7 @@ var child1;
 
 
 
-// uncomment after placing your favicon in /public
+//Codigo para colocar el favicon dentro de la aplicación
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -107,8 +70,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-//CONTROL relays
-
+//Declaración de variables para los GPIO usados por los Relays
 var fs = require('fs');
 var sock;
 
@@ -118,20 +80,6 @@ var relay2 = new GPIOS(18, 'out');
 var relay3 = new GPIOS(19, 'out');
 var relay4 = new GPIOS(20, 'out');
 
-
-/*function handler (req, res) {
-  fs.readFile('index.html',
-  function (err, data) {
-    if (err) {
-      res.writeHead(500);
-      return res.end('Error loading iluminacion.html');
-    }
-    res.writeHead(200);
-    res.end(data);
-  });
-}*/
-
-//Fin CONTROL relays
 
 //Cuando abramos el navegador estableceremos una conexión con socket.io.
 //Cada X segundos mandaremos a la gráfica un nuevo valor.
@@ -143,14 +91,14 @@ io.sockets.on('connection', function(socket) {
 
 
   sock = socket;
-  
+
   //usa GPIO 17 para encender/apagar relay 1
   socket.on('relay1', function (data) {
     console.log(data);
     if (data == 'on'){
           relay1.writeSync(1);
           socket.emit('ledstatus', 'green');
- 
+
     }else{
         relay1.writeSync(0);
         socket.emit('ledstatus', 'red');
@@ -163,7 +111,7 @@ io.sockets.on('connection', function(socket) {
     if (data == 'on'){
           relay2.writeSync(1);
           socket.emit('ledstatus', 'green');
- 
+
     }else{
         relay2.writeSync(0);
         socket.emit('ledstatus', 'red');
@@ -176,7 +124,7 @@ io.sockets.on('connection', function(socket) {
     if (data == 'on'){
           relay3.writeSync(1);
           socket.emit('ledstatus', 'green');
- 
+
     }else{
         relay3.writeSync(0);
         socket.emit('ledstatus', 'red');
@@ -189,14 +137,14 @@ io.sockets.on('connection', function(socket) {
     if (data == 'on'){
           relay4.writeSync(1);
           socket.emit('ledstatus', 'green');
- 
+
     }else{
         relay4.writeSync(0);
         socket.emit('ledstatus', 'red');
     }
   });
 
-	
+
   // Funcion para revisar el estado de la memoria
     child = exec("egrep --color 'MemTotal' /proc/meminfo | egrep '[0-9.]{4,}' -o", function (error, stdout, stderr) {
     if (error !== null) {
@@ -206,7 +154,7 @@ io.sockets.on('connection', function(socket) {
       socket.emit('memoryTotal', stdout);
     }
   });
-  
+
   // Funcion para obtener el nombre del host
     child = exec("hostname", function (error, stdout, stderr) {
     if (error !== null) {
