@@ -24,7 +24,7 @@
 
     <script>
         var socket = io.connect();
-        socket.on('relay3', function (value) {
+        socket.on('statusRelay3', function (value) {
           if(value == 1){
             document.getElementById("estado1").innerHTML = "Encendida";
           }else{

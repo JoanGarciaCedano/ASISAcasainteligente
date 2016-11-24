@@ -167,7 +167,7 @@ io.sockets.on('connection', function(socket) {
 
 //Funcion para recuperar los valores de los Relays almacenados en la base de datos
 //Posteriormente se emiten por socket.io a las vistas para cambiar los labels
-/*var mandarRelay = function(db, callback){
+var mandarRelay = function(db, callback){
 var cursor =db.collection('raspberry').find();
 
 cursor.each(function(err, doc) {
@@ -188,7 +188,7 @@ MongoClient.connect(url,function(err,db){
 		db.close();
 	});
 });
-*/
+
   //usa GPIO 17 para encender/apagar relay 1
   socket.on('relay1', function (data) {
     console.log(data);
