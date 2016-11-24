@@ -22,7 +22,7 @@ MongoClient.connect(url, function(err, db){
 });
 
 //Funciòn para insertar la collection a la Base de Datos -- YA INSERTADOS
-/*
+
 var insertarDocumento = function(db, callback) {
    db.collection('raspberry').insertOne( {
 		 "datosRaspBerry" : {
@@ -49,8 +49,7 @@ MongoClient.connect(url, function(err, db) {
   });
 });
 
-*/
-
+/*
 var removerBD = function(db, callback) {
    db.collection('raspberry').deleteMany( {}, function(err, results) {
       console.log(results);
@@ -65,6 +64,7 @@ MongoClient.connect(url, function(err, db) {
       db.close();
   });
 });
+*/
 
 //Funciones para actualizar el estado de los relays
 var actualizarBASERelay1 = function(db, valRelay1, callback){
