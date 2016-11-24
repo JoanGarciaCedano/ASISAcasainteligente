@@ -25,7 +25,10 @@ MongoClient.connect(url, function(err, db){
 
 var insertarDocumento = function(db, callback) {
    db.collection('raspberry').insertOne( {
-      "statusCasa" : {
+		 "datosRaspBerry" : {
+		         "mac" : "b8:27:eb:e4:91:38"
+			 },
+			"statusCasa" : {
 	 "relay1" : "",
    "relay2" : "",
  	 "relay3" : "",
@@ -45,6 +48,56 @@ MongoClient.connect(url, function(err, db) {
       db.close();
   });
 });
+
+
+//Funciones para actualizar el estado de los relays
+var actualizarBASERelay1 = function(db, valRelay1, callback){
+	db.collection('raspberry').updateOne(
+		{ "datosRaspBerry.mac" : "b8:27:eb:e4:91:38" },
+		 {
+			$set:{
+					"statusCasa.relay1": valRelay1
+			}
+		},function(err, results){
+				callback();
+		});
+};
+
+var actualizarBASERelay2 = function(db, valRelay2, callback){
+	db.collection('raspberry').updateOne(
+		{ "datosRaspBerry.mac" : "b8:27:eb:e4:91:38" },
+		 {
+			$set:{
+					"statusCasa.relay2": valRelay2
+			}
+		},function(err, results){
+				callback();
+		});
+};
+
+var actualizarBASERelay3 = function(db, valRelay3, callback){
+	db.collection('raspberry').updateOne(
+		{ "datosRaspBerry.mac" : "b8:27:eb:e4:91:38" },
+		 {
+			$set:{
+					"statusCasa.relay3": valRelay3
+			}
+		},function(err, results){
+				callback();
+		});
+};
+
+var actualizarBASERelay4 = function(db, valRelay4, callback){
+	db.collection('raspberry').updateOne(
+		{ "datosRaspBerry.mac" : "b8:27:eb:e4:91:38" },
+		 {
+			$set:{
+					"statusCasa.relay4": valRelay4
+			}
+		},function(err, results){
+				callback();
+		});
+};
 
 //Agregadas para pruebas--------------------------------->>
 var http = require('http');
