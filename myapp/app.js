@@ -41,7 +41,7 @@ var insertarDocumento = function(db, callback) {
 
 MongoClient.connect(url, function(err, db) {
   assert.equal(null, err);
-  insertarDocumentos(db, function() {
+  insertarDocumento(db, function() {
       db.close();
   });
 });
