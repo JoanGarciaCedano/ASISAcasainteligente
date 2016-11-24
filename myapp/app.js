@@ -5,6 +5,24 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+//--------------------------------MONGO DB
+
+var MongoClient = require ('mongodb').MongoClient,
+assert = require('assert');
+var ObjectId = require('mongodb').ObjectID;
+var url = 'mongodb://localhost:27017/raspberry';
+
+
+//Conectar MongoDB
+
+MongoClient.connect(url, function(err, db){
+	assert.equal(null,err);
+	console.log("Conectado correctamente a: "+url);
+	db.close();
+});
+
+//--------------------------------TERMINA MONGO DB
+
 //ººººººººººººººººººººººººººººººººººººººWebService PRUEBA
 var querystring = require('querystring');
 var cerhttp = require('http');
