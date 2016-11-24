@@ -1,0 +1,11 @@
+Para activar servicios al momento de arrancar tenemos que ir a la siguiente dirección:
+
+etc/rc.local
+
+poner ahí las lineas que queremos que se ejecuten ejem:
+
+//para mongodb
+
+sudo mongod --repair
+sudo mongo
+mongod --fork --logpath /var/log/mongodb.log
