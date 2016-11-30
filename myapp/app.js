@@ -5,69 +5,42 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-//--------------------------------MONGO DB
+//Modulos para crear el servidor http
+var http = require('http');
+var app = module.exports.app = express();
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
+//sys = require('util'),
+var sensorLib = require('node-dht-sensor'),
+var exec = require('child_process').exec,
+var gpio = require('rpi-gpio');
+var child;
+var child1;
+//------------------------------------------------------->>
 
-var MongoClient = require ('mongodb').MongoClient,
-assert = require('assert');
+//Codigo para colocar el favicon dentro de la aplicación
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+//Modulos necesarios para MongoDB
+var MongoClient = require ('mongodb').MongoClient;
+var assert = require('assert');
 var ObjectId = require('mongodb').ObjectID;
 var url = 'mongodb://localhost:27017/raspberry';
 
 
-//Conectar MongoDB
-
+//Conexión con MongoDB
 MongoClient.connect(url, function(err, db){
 	assert.equal(null,err);
-	console.log("Conectado correctamente a: "+url);
+	console.log("Conexión exitosa a : " + url);
 	db.close();
 });
 
-//Funciòn para insertar la collection a la Base de Datos -- YA INSERTADOS
-/*
-var insertarDocumento = function(db, callback) {
-   db.collection('raspberry').insertOne( {
-		 "datosRaspBerry" : {
-		         "mac" : "b8:27:eb:e4:91:38"
-			 },
-			"statusCasa" : {
-	 "relay1" : "",
-   "relay2" : "",
- 	 "relay3" : "",
-	 "relay4" : ""
-	 },
-	},
-    function(err, result) {
-    assert.equal(err, null);
-    console.log("Se insertaron los documentos dentro de la coleciòn raspberry!!");
-    callback();
-  });
-};
-
-MongoClient.connect(url, function(err, db) {
-  assert.equal(null, err);
-  insertarDocumento(db, function() {
-      db.close();
-  });
-});
-*/
-
-/*
-var removerBD = function(db, callback) {
-   db.collection('raspberry').deleteMany( {}, function(err, results) {
-      console.log(results);
-      callback();
-   });
-};
-
-MongoClient.connect(url, function(err, db) {
-  assert.equal(null, err);
-
-  removerBD(db, function() {
-      db.close();
-  });
-});
-*/
-
-//Funciones para actualizar el estado de los relays
+//Función para actualizar el estado del relevador 1 en MongoDB
 var actualizarBASERelay1 = function(db, valRelay1, callback){
 	db.collection('raspberry').updateOne(
 		{ "datosRaspBerry.mac" : "b8:27:eb:e4:91:38" },
@@ -80,6 +53,7 @@ var actualizarBASERelay1 = function(db, valRelay1, callback){
 		});
 };
 
+//Función para actualizar el estado del relevador 2 en MongoDB
 var actualizarBASERelay2 = function(db, valRelay2, callback){
 	db.collection('raspberry').updateOne(
 		{ "datosRaspBerry.mac" : "b8:27:eb:e4:91:38" },
@@ -92,6 +66,7 @@ var actualizarBASERelay2 = function(db, valRelay2, callback){
 		});
 };
 
+//Función para actualizar el estado del relevador 3 en MongoDB
 var actualizarBASERelay3 = function(db, valRelay3, callback){
 	db.collection('raspberry').updateOne(
 		{ "datosRaspBerry.mac" : "b8:27:eb:e4:91:38" },
@@ -104,6 +79,7 @@ var actualizarBASERelay3 = function(db, valRelay3, callback){
 		});
 };
 
+//Función para actualizar el estado del relevador 4 en MongoDB
 var actualizarBASERelay4 = function(db, valRelay4, callback){
 	db.collection('raspberry').updateOne(
 		{ "datosRaspBerry.mac" : "b8:27:eb:e4:91:38" },
@@ -115,30 +91,6 @@ var actualizarBASERelay4 = function(db, valRelay4, callback){
 				callback();
 		});
 };
-
-//Agregadas para pruebas--------------------------------->>
-var http = require('http');
-var app = module.exports.app = express();
-var server = http.createServer(app);
-io = require('socket.io').listen(server);
-sys = require('util'),
-sensorLib = require('node-dht-sensor'),
-exec = require('child_process').exec,
-gpio = require('rpi-gpio');
-var child;
-var child1;
-//------------------------------------------------------->>
-
-
-
-//Codigo para colocar el favicon dentro de la aplicación
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
 
 //Declaración de variables para los GPIO usados por los Relays
 var fs = require('fs');

@@ -1,0 +1,45 @@
+//Funciòn para insertar la collection a la Base de Datos -- YA INSERTADOS
+/*
+var insertarDocumento = function(db, callback) {
+   db.collection('raspberry').insertOne( {
+		 "datosRaspBerry" : {
+		         "mac" : "b8:27:eb:e4:91:38"
+			 },
+			"statusCasa" : {
+	 "relay1" : "",
+   "relay2" : "",
+ 	 "relay3" : "",
+	 "relay4" : ""
+	 },
+	},
+    function(err, result) {
+    assert.equal(err, null);
+    console.log("Se insertaron los documentos dentro de la coleciòn raspberry!!");
+    callback();
+  });
+};
+
+MongoClient.connect(url, function(err, db) {
+  assert.equal(null, err);
+  insertarDocumento(db, function() {
+      db.close();
+  });
+});
+*/
+
+/*
+var removerBD = function(db, callback) {
+   db.collection('raspberry').deleteMany( {}, function(err, results) {
+      console.log(results);
+      callback();
+   });
+};
+
+MongoClient.connect(url, function(err, db) {
+  assert.equal(null, err);
+
+  removerBD(db, function() {
+      db.close();
+  });
+});
+*/
