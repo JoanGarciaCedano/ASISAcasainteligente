@@ -193,6 +193,9 @@
     // Creo un nuevo objeto 'Chart'
     var chart, chartCPU, chartHum, chartTemp, chartMem, memTotal, chartProx;
 
+    socket.on('disconnect', function () {
+   console.log('disconnect client event....');
+    }); 
 
     chart = new Highcharts.StockChart({
         chart: {
