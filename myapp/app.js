@@ -11,15 +11,20 @@ var http = require('http');
 var app = module.exports.app = express();
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
-//sys = require('util'),
+
+//Modulos para sensores
 var sensorLib = require('node-dht-sensor');
-var exec = require('child_process').exec;
 var gpio = require('rpi-gpio');
+
+//Modulo para usar GPIO de Relevadores
+var GPIOS = require('onoff').Gpio;
+
+//Modulo y variables usadas para los procesos de la Raspberry Pi
+var exec = require('child_process').exec;
 var child;
 var child1;
-//------------------------------------------------------->>
 
-//Codigo para colocar el favicon dentro de la aplicación
+//Metodos para express
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -93,32 +98,32 @@ var actualizarBASERelay4 = function(db, valRelay4, callback){
 		});
 };
 
-//Declaración de variables para los GPIO usados por los Relays
-var fs = require('fs');
-var sock;
+//Variables para los GPIO usados por los relevadores
+var relay1 = new GPIOS(17, 'out'); //GPIO numero 17
+var relay2 = new GPIOS(18, 'out'); //GPIO numero 18
+var relay3 = new GPIOS(19, 'out'); //GPIO numero 19
+var relay4 = new GPIOS(20, 'out'); //GPIO numero 20
 
-var GPIOS = require('onoff').Gpio;
-var relay1 = new GPIOS(17, 'out');
-var relay2 = new GPIOS(18, 'out');
-var relay3 = new GPIOS(19, 'out');
-var relay4 = new GPIOS(20, 'out');
-
-//Funcion para inicializar Relays dependiendo del estado en la BDD
+//Funcion para recuperar el estado de los relevadores desde MongoDB
 var estadoRelay = function(db, callback){
-var cursor =db.collection('raspberry').find();
+	var cursor =db.collection('raspberry').find();
 
-cursor.each(function(err, doc) {
-assert.equal(err, null);
-if (doc != null) {
-relay1.writeSync(doc.statusCasa.relay1);
-relay2.writeSync(doc.statusCasa.relay2);
-relay3.writeSync(doc.statusCasa.relay3);
-relay4.writeSync(doc.statusCasa.relay4);
-}
-else { callback(); }
-});
+	cursor.each(function(err, doc){
+		assert.equal(err, null);
+
+		if(doc != null){
+			relay1.writeSync(doc.statusCasa.relay1);
+			relay2.writeSync(doc.statusCasa.relay2);
+			relay3.writeSync(doc.statusCasa.relay3);
+			relay4.writeSync(doc.statusCasa.relay4);
+		}
+		else{
+			callback();
+		}
+	});
 }
 
+//Llamada a la función "estadoRelay"
 MongoClient.connect(url,function(err,db){
 	assert.equal(null, err);
 	estadoRelay(db, function(){
@@ -127,19 +132,26 @@ MongoClient.connect(url,function(err,db){
 });
 
 
-//Cuando abramos el navegador estableceremos una conexión con socket.io.
-//Cada X segundos mandaremos a la gráfica un nuevo valor.
+//Establecemos una conexión cuando se abra el navegador
 io.sockets.on('connection', function(socket) {
-  var memTotal, memUsed = 0, memFree = 0, memBuffered = 0, memCached = 0, sendData = 1, percentBuffered, percentCached, percentUsed, percentFree;
-  var address = socket.handshake.address;
 
+	//Variables para memoria
+  var memTotal;
+	var memUsed = 0;
+	var	memFree = 0;
+	var memBuffered = 0;
+	var memCached = 0;
+	var sendData = 1;
+	var	percentBuffered;
+	var percentCached;
+  var	percentUsed;
+	var percentFree;
+
+	//Codigo para obtener el dato del usuario conectado
+  var address = socket.handshake.address;
+	console.log("Nueva conexion ha:" + address.address + ":" + address.port );
 //Variables para almacenar valor de relays
 	var valRelay1 = 0, valRelay2 = 0, valRelay3 = 0, valRelay4 = 0;
-
-	console.log("Nueva conexion desde:" + address);
-
-
-  sock = socket;
 
 //Funcion para recuperar los valores de los Relays almacenados en la base de datos
 //Posteriormente se emiten por socket.io a las vistas para cambiar los labels
