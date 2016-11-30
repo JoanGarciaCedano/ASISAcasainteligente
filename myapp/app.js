@@ -159,7 +159,7 @@ io.sockets.on('connection', function(socket) {
 	console.log("Nueva conexion desde: " + direccion + ":" + puerto );
 
 	socket.on('disconnect', function () {
-    console.log("usuario desconectado");
+    console.log("La dirección: "+direccion+":"+puerto+" se ha desconectado de la aplicación");
   });
 
 //Funcion para recuperar los valores de los Relays almacenados en la base de datos
