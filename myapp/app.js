@@ -158,9 +158,6 @@ io.sockets.on('connection', function(socket) {
  	var puerto = socket.request.connection.remotePort;
 	console.log("Nueva conexion desde: " + direccion + ":" + puerto );
 
-	//Función para desconectar la sesión
-	socket.on("disconnect",)
-
 //Funcion para recuperar los valores de los Relays almacenados en la base de datos
 //Posteriormente se emiten por socket.io a las vistas para cambiar los labels
 var mandarRelay = function(db, callback){
