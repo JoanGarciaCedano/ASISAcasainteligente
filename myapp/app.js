@@ -149,7 +149,8 @@ io.sockets.on('connection', function(socket) {
 
 	//Codigo para obtener el dato del usuario conectado
 	var direccion = socket.request.connection.remoteAddress;
- 	var puerto socket.request.connection.remotePort
+ 	var puerto = socket.request.connection.remotePort;
+	
 	console.log("Nueva conexion ha:" + direccion + ":" + puerto );
 //Variables para almacenar valor de relays
 	var valRelay1 = 0, valRelay2 = 0, valRelay3 = 0, valRelay4 = 0;
