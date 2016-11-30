@@ -160,7 +160,6 @@ io.sockets.on('connection', function(socket) {
 
 	socket.on('disconnect', function () {
     console.log("usuario desconectado");
-		server.close();
   });
 
 //Funcion para recuperar los valores de los Relays almacenados en la base de datos
