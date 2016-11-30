@@ -1,3 +1,4 @@
+//Modulos necesarios para Express
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -11,8 +12,8 @@ var app = module.exports.app = express();
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 //sys = require('util'),
-var sensorLib = require('node-dht-sensor'),
-var exec = require('child_process').exec,
+var sensorLib = require('node-dht-sensor');
+var exec = require('child_process').exec;
 var gpio = require('rpi-gpio');
 var child;
 var child1;
