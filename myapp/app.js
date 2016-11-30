@@ -148,8 +148,9 @@ io.sockets.on('connection', function(socket) {
 	var percentFree;
 
 	//Codigo para obtener el dato del usuario conectado
-  var address = socket.handshake.address;
-	console.log("Nueva conexion ha:" + address.address + ":" + address.port );
+	var direccion = socket.request.connection.remoteAddress;
+ 	var puerto socket.request.connection.remotePort
+	console.log("Nueva conexion ha:" + direccion + ":" + puerto );
 //Variables para almacenar valor de relays
 	var valRelay1 = 0, valRelay2 = 0, valRelay3 = 0, valRelay4 = 0;
 
