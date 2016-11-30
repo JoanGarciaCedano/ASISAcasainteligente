@@ -147,13 +147,19 @@ io.sockets.on('connection', function(socket) {
   var	percentUsed;
 	var percentFree;
 
+	//Variables para almacenar valor de relays
+	var valRelay1 = 0;
+	var valRelay2 = 0;
+	var valRelay3 = 0;
+	var valRelay4 = 0;
+
 	//Codigo para obtener el dato del usuario conectado
 	var direccion = socket.request.connection.remoteAddress;
  	var puerto = socket.request.connection.remotePort;
-	
-	console.log("Nueva conexion ha:" + direccion + ":" + puerto );
-//Variables para almacenar valor de relays
-	var valRelay1 = 0, valRelay2 = 0, valRelay3 = 0, valRelay4 = 0;
+	console.log("Nueva conexion desde: " + direccion + ":" + puerto );
+
+	//Función para desconectar la sesión
+	socket.on("disconnect",)
 
 //Funcion para recuperar los valores de los Relays almacenados en la base de datos
 //Posteriormente se emiten por socket.io a las vistas para cambiar los labels
@@ -429,6 +435,12 @@ setInterval(function(){
 
 });
 
+io.sockets.on('disconnect', function() {
+	// handle disconnect
+	io.sockets.disconnect();
+	io.sockets.close();
+	console.log("Se ha cerrado la conexion con Socket.io")
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
