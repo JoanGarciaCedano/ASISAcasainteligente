@@ -7,9 +7,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 //Modulo y variables para obtener la fecha, etc.
-fecha = new Date();
-hora = fecha.getHours();
-minutos = fecha.getMinutes();
+var fecha = new Date();
+var hora = fecha.getHours();
+var minutos = fecha.getMinutes();
 
 console.log("La hora es: "+hora+":"+minutos);
 
@@ -141,6 +141,10 @@ MongoClient.connect(url,function(err,db){
 
 //Establecemos una conexión cuando se abra el navegador
 io.sockets.on('connection', function(socket) {
+
+	//Variables tiempo
+	var horitas = hora;
+	var minutitos = minutos;
 
 	//Variables para memoria
   var memTotal;
@@ -275,7 +279,7 @@ io.sockets.on('connection', function(socket) {
 		});//MongoClient
   });
 
-		if(hora == 15 && minutos = 35){
+		if(horitas == 15 && minutitos == 35){
 			relay4.writeSync(1);
 			valRelay4 = 1;
 		}else if (hora == 16) {
