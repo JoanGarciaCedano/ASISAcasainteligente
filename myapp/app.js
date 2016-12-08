@@ -6,11 +6,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-//Modulo y variables para obtener la fecha, etc.
-var fecha = new Date();
-var hora = fecha.getHours();
-var minutos = fecha.getMinutes();
-
 console.log("La hora es: "+hora+":"+minutos);
 
 //Modulos para crear el servidor http
@@ -142,9 +137,6 @@ MongoClient.connect(url,function(err,db){
 //Establecemos una conexión cuando se abra el navegador
 io.sockets.on('connection', function(socket) {
 
-	//Variables tiempo
-	var horitas = hora;
-	var minutitos = minutos;
 
 	//Variables para memoria
   var memTotal;
@@ -281,7 +273,12 @@ io.sockets.on('connection', function(socket) {
 
 	// Function for measuring temperature
 	setInterval(function(){
-				if(horitas == 16 && minutitos >= 10){
+				//Modulo y variables para obtener la fecha, etc.
+				var fecha = new Date();
+				var hora = fecha.getHours();
+				var minutos = fecha.getMinutes();
+
+				if(hora == 16 && minutos >= 10){
 					relay4.writeSync(1);
 					valRelay4 = 1;
 				}else{
