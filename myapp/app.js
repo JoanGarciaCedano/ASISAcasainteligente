@@ -6,6 +6,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+//Modulo y variables para obtener la fecha, etc.
+fecha = new Date();
+hora = fecha.getHours();
+minutos = fecha.getMinutes();
+
+console.console.log("La hora es: "+hora+":"+minutos);
+
 //Modulos para crear el servidor http
 var http = require('http');
 var app = module.exports.app = express();
@@ -158,33 +165,35 @@ io.sockets.on('connection', function(socket) {
  	var puerto = socket.request.connection.remotePort;
 	console.log("Nueva conexion desde: " + direccion + ":" + puerto );
 
+	//Codigo para saber cuando un usuario se desconecta de la aplicación
 	socket.on('disconnect', function () {
     console.log("La dirección: "+direccion+":"+puerto+" se ha desconectado de la aplicación");
   });
 
-//Funcion para recuperar los valores de los Relays almacenados en la base de datos
-//Posteriormente se emiten por socket.io a las vistas para cambiar los labels
-var mandarRelay = function(db, callback){
-var cursor =db.collection('raspberry').find();
+	//Funcion para recuperar los valores de los Relays almacenados en la base de datos
+	//Posteriormente se emiten por socket.io a las vistas para cambiar los labels
+	var mandarRelay = function(db, callback){
+	var cursor =db.collection('raspberry').find();
+	cursor.each(function(err, doc) {
+			assert.equal(err, null);
+			if (doc != null) {
+				socket.emit('statusRelay1', doc.statusCasa.relay1);
+				socket.emit('statusRelay2', doc.statusCasa.relay2);
+				socket.emit('statusRelay3', doc.statusCasa.relay3);
+				socket.emit('statusRelay4', doc.statusCasa.relay4);
+			}
+			else {
+				callback();
+			}
+		});
+	}
 
-cursor.each(function(err, doc) {
-assert.equal(err, null);
-if (doc != null) {
-socket.emit('statusRelay1', doc.statusCasa.relay1);
-socket.emit('statusRelay2', doc.statusCasa.relay2);
-socket.emit('statusRelay3', doc.statusCasa.relay3);
-socket.emit('statusRelay4', doc.statusCasa.relay4);
-}
-else { callback(); }
-});
-}
-
-MongoClient.connect(url,function(err,db){
-	assert.equal(null, err);
-	mandarRelay(db, function(){
-		db.close();
+	MongoClient.connect(url,function(err,db){
+		assert.equal(null, err);
+		mandarRelay(db, function(){
+			db.close();
+		});
 	});
-});
 
   //usa GPIO 17 para encender/apagar relay 1
   socket.on('relay1', function (data) {
