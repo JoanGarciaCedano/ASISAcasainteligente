@@ -11,7 +11,7 @@ fecha = new Date();
 hora = fecha.getHours();
 minutos = fecha.getMinutes();
 
-console.console.log("La hora es: "+hora+":"+minutos);
+console.log("La hora es: "+hora+":"+minutos);
 
 //Modulos para crear el servidor http
 var http = require('http');
