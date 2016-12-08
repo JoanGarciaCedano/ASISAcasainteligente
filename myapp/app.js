@@ -146,6 +146,8 @@ io.sockets.on('connection', function(socket) {
 	var horitas = hora;
 	var minutitos = minutos;
 
+	console.log("TIEMPITO"+hora+":"+minutos);
+
 	//Variables para memoria
   var memTotal;
 	var memUsed = 0;
