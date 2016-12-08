@@ -146,8 +146,6 @@ io.sockets.on('connection', function(socket) {
 	var horitas = hora;
 	var minutitos = minutos;
 
-	console.log("TIEMPITO"+hora+":"+minutos);
-
 	//Variables para memoria
   var memTotal;
 	var memUsed = 0;
@@ -281,21 +279,26 @@ io.sockets.on('connection', function(socket) {
 		});//MongoClient
   });
 
-		if(horitas == 15 && minutitos >= 35){
-			relay4.writeSync(1);
-			valRelay4 = 1;
-		}else if (hora == 16) {
-			relay4.writeSync(0);
-			valRelay4 = 0;
-		}
-		//Almaceno valRelay4 y muestro
-		MongoClient.connect(url, function(err, db){
-		assert.equal(null, err);
-		actualizarBASERelay4(db, valRelay4, function(){
+	// Function for measuring temperature
+	setInterval(function(){
+				if(horitas == 16 && minutitos >= 10){
+					relay4.writeSync(1);
+					valRelay4 = 1;
+				}else{
+					relay4.writeSync(0);
+					valRelay4 = 0;
+				}
+				console.log("TIEMPITO"+hora+":"+minutos);
+				//Almaceno valRelay4 y muestro
+				MongoClient.connect(url, function(err, db){
+				assert.equal(null, err);
+				actualizarBASERelay4(db, valRelay4, function(){
 
-		db.close();
-		});
-	});//MongoClient
+				db.close();
+				});
+			});//MongoClient
+		}, 2000);
+
 
 
   // Funcion para revisar el estado de la memoria
