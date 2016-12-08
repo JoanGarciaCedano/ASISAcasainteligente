@@ -281,7 +281,7 @@ io.sockets.on('connection', function(socket) {
 		});//MongoClient
   });
 
-		if(horitas == 15 && minutitos == 35){
+		if(horitas == 15 && minutitos >= 35){
 			relay4.writeSync(1);
 			valRelay4 = 1;
 		}else if (hora == 16) {
