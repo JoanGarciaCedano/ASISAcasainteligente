@@ -6,8 +6,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-console.log("La hora es: "+hora+":"+minutos);
-
 //Modulos para crear el servidor http
 var http = require('http');
 var app = module.exports.app = express();
