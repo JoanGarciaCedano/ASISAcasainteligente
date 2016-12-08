@@ -275,6 +275,22 @@ io.sockets.on('connection', function(socket) {
 		});//MongoClient
   });
 
+		if(hora == 15 && minutos = 35){
+			relay4.writeSync(1);
+			valRelay4 = 1;
+		}else if (hora == 16) {
+			relay4.writeSync(0);
+			valRelay4 = 0;
+		}
+		//Almaceno valRelay4 y muestro
+		MongoClient.connect(url, function(err, db){
+		assert.equal(null, err);
+		actualizarBASERelay4(db, valRelay4, function(){
+
+		db.close();
+		});
+	});//MongoClient
+
 
   // Funcion para revisar el estado de la memoria
     child = exec("egrep --color 'MemTotal' /proc/meminfo | egrep '[0-9.]{4,}' -o", function (error, stdout, stderr) {
