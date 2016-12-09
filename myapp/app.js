@@ -135,7 +135,6 @@ MongoClient.connect(url,function(err,db){
 //Establecemos una conexión cuando se abra el navegador
 io.sockets.on('connection', function(socket) {
 
-
 	//Variables para memoria
   var memTotal;
 	var memUsed = 0;
@@ -276,12 +275,14 @@ io.sockets.on('connection', function(socket) {
 				var hora = fecha.getHours();
 				var minutos = fecha.getMinutes();
 
-				if(hora == 16 && minutos >= 10){
+				if(hora == 11 && minutos >= 15){
 					relay4.writeSync(1);
 					valRelay4 = 1;
+					socket.emit('statusRelay4', valRelay4);
 				}else{
 					relay4.writeSync(0);
 					valRelay4 = 0;
+					socket.emit('estatusRelay4', valRelay4);
 				}
 				console.log("TIEMPITO"+hora+":"+minutos);
 				//Almaceno valRelay4 y muestro

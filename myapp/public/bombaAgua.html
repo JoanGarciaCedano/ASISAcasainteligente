@@ -49,24 +49,24 @@
       socket.emit('relay3', 'off');
 	     document.getElementById("estado1").innerHTML = "Apagada";
     }
-    function relay4On(){
+    /*function relay4On(){
       socket.emit('relay4', 'on');
 	    document.getElementById("estado2").innerHTML = "Encendida";
     }
     function relay4Off(){
       socket.emit('relay4', 'off');
 	    document.getElementById("estado2").innerHTML = "Apagada";
-    }
+    }*/
     </script>
 
   </head>
 
   <body>
-    <div class="container-fluid display-table">
       <div class="row display-table-row">
         <!--side menu -->
           <div class="col-md-2 col-sm-2 hidden-xs display-table-cell valign-top" id="side-menu">
     	    <ul>
+            <div class="container-fluid display-table">
     	      <li class="link">
     	        <a href="index.html">
                 <span aria-hidden="true" ></span>
@@ -161,7 +161,7 @@
             </div>
 
 	     <div class="row">
-		<center><h4>Bomba de Agua del Tinaco</h4></center>
+		<center><h4>Bomba de Agua de la Alberca</h4></center>
 		<center><h4 id="estado1">Estado</h4></center>
 	    </div>
  	    <div class="row">
@@ -174,13 +174,17 @@
 	    <hr>
 
 	     <div class="row">
-		<center><h4>Bomba de Agua de la Alberca</h4></center>
+		<center><h4>Bomba de Agua del Tinaco</h4></center>
 		<center><h4 id="estado2">Estado</h4></center>
 	    </div>
 	    <div class="row">
 	      <div class="jumbotron" id="jumbo2">
-	        <center><input class="btn btn-success btn-lg" type="button" name="on" id="onButton" value="Prender" onClick="relay4On();">
-	        <input class="btn btn-danger btn-lg" type="button" name="on" id="offButton" value="Apagar" onClick="relay4Off();"></center>
+          <p>
+            El timer de la bomba de agua está establecido para que esta encienda a las 4:00 pm y
+            se apague a las 5:00 pm.
+          </p>
+	        <!--<center><input class="btn btn-success btn-lg" type="button" name="on" id="onButton" value="Prender" onClick="relay4On();">
+	        <input class="btn btn-danger btn-lg" type="button" name="on" id="offButton" value="Apagar" onClick="relay4Off();"></center>-->
 	      </div>
             </div>
 
