@@ -284,7 +284,7 @@ io.sockets.on('connection', function(socket) {
 					valRelay4 = 0;
 					socket.emit('statusRelay4', valRelay4);
 				}
-				console.log("TIEMPITO"+hora+":"+minutos);
+				//console.log("TIEMPITO"+hora+":"+minutos);
 				//Almaceno valRelay4 y muestro
 				MongoClient.connect(url, function(err, db){
 				assert.equal(null, err);
