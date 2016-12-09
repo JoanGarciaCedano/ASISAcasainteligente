@@ -282,7 +282,7 @@ io.sockets.on('connection', function(socket) {
 				}else{
 					relay4.writeSync(0);
 					valRelay4 = 0;
-					socket.emit('estatusRelay4', valRelay4);
+					socket.emit('statusRelay4', valRelay4);
 				}
 				console.log("TIEMPITO"+hora+":"+minutos);
 				//Almaceno valRelay4 y muestro
