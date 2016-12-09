@@ -275,7 +275,7 @@ io.sockets.on('connection', function(socket) {
 				var hora = fecha.getHours();
 				var minutos = fecha.getMinutes();
 
-				if(hora == 11 && minutos >= 15){
+				if(hora == 13 && minutos >= 55){
 					relay4.writeSync(1);
 					valRelay4 = 1;
 					socket.emit('statusRelay4', valRelay4);
