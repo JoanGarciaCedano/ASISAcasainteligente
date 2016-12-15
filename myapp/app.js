@@ -179,10 +179,11 @@ io.sockets.on('connection', function(socket) {
         console.log("La dirección: " + direccion + ":" + puerto + " se ha desconectado de la aplicación");
     });
 
+		//Leer cada segundo la energía eléctrica
 		setInterval(function() {
       leerCFE();
 			leerPANEL();
-    }, 2000);
+    }, 1000);
 
     //Funcion para recuperar los valores de los Relays almacenados en la base de datos
     //Posteriormente se emiten por socket.io a las vistas para cambiar los labels
