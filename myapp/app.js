@@ -132,26 +132,27 @@ MongoClient.connect(url, function(err, db) {
     });
 });
 
-//Lectura de Energía Electrica
-gpio.setup(40, gpio.DIR_IN, leerCFE);
-gpio.setup(37, gpio.DIR_IN, leerPANEL);
-
-function leerCFE() {
-    gpio.read(40, function(err, value) {
-        console.log('The value 40 is ' + value);
-				socket.emit('statusCFE', value);
-    });
-}
-
-function leerPANEL() {
-    gpio.read(37, function(err, value) {
-        console.log('The value 37 is ' + value);
-				socket.emit('statusPANEL', value);
-    });
-}
 
 //Establecemos una conexión cuando se abra el navegador
 io.sockets.on('connection', function(socket) {
+
+    //Lectura de Energía Electrica
+    gpio.setup(40, gpio.DIR_IN, leerCFE);
+    gpio.setup(37, gpio.DIR_IN, leerPANEL);
+
+    function leerCFE() {
+        gpio.read(40, function(err, value) {
+            console.log('The value 40 is ' + value);
+            socket.emit('statusCFE', value);
+        });
+    }
+
+    function leerPANEL() {
+        gpio.read(37, function(err, value) {
+            console.log('The value 37 is ' + value);
+            socket.emit('statusPANEL', value);
+        });
+    }
 
     //Variables para memoria
     var memTotal;
@@ -181,10 +182,10 @@ io.sockets.on('connection', function(socket) {
         console.log("La dirección: " + direccion + ":" + puerto + " se ha desconectado de la aplicación");
     });
 
-		//Leer cada segundo la energía eléctrica
-		setInterval(function() {
-      leerCFE();
-			leerPANEL();
+    //Leer cada segundo la energía eléctrica
+    setInterval(function() {
+        leerCFE();
+        leerPANEL();
     }, 1000);
 
     //Funcion para recuperar los valores de los Relays almacenados en la base de datos
