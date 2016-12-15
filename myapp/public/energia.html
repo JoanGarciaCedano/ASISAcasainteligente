@@ -20,42 +20,13 @@
 
     <script>
         var socket = io.connect();
-        /*socket.on('statusRelay3', function(value) {
-            if (value == 1) {
-                document.getElementById("estado1").innerHTML = "Encendida";
+        socket.on('statusCFE', function(value) {
+            if (value == true) {
+                document.getElementById("energiaCFE").innerHTML = '<span class="label label-success">Energía Activa</span>"';
             } else {
-                document.getElementById("estado1").innerHTML = "Apagada";
+                document.getElementById("energiaCFE").innerHTML = '<span class="label label-danger">Energía Inactiva</span>"';
             }
         });
-        socket.on('statusRelay4', function(value) {
-            if (value == 1) {
-                document.getElementById("estado2").innerHTML = "Encendida";
-            } else {
-                document.getElementById("estado2").innerHTML = "Apagada";
-            }
-        });*
-    </script>
-
-    <script>
-        /*function relay3On() {
-                                            socket.emit('relay3', 'on');
-                                            document.getElementById("estado1").innerHTML = "Encendida";
-                                        }
-
-                                        function relay3Off() {
-                                            socket.emit('relay3', 'off');
-                                            document.getElementById("estado1").innerHTML = "Apagada";
-                                        }
-
-                                        function relay4On() {
-                                            socket.emit('relay4', 'on');
-                                            document.getElementById("estado2").innerHTML = "Encendida";
-                                        }
-
-                                        function relay4Off() {
-                                            socket.emit('relay4', 'off');
-                                            document.getElementById("estado2").innerHTML = "Apagada";
-                                        }*/
     </script>
 
 </head>
@@ -164,7 +135,7 @@
                         </div>
                         <div class="thumbnail col-md-3">
                             <center><h3>Existe energía de CFE?</h3></center>
-                            <center><h1><span class="label label-default">Esperando dato</span></h1></center>
+                            <center><h1 id="energiaCFE"><span class="label label-default">Esperando dato</span></h1></center>
                         </div>
                         <div class="thumbnail col-md-3">
                             <center><h3>Alimentando UPS?</h3></center>

@@ -139,12 +139,14 @@ gpio.setup(37, gpio.DIR_IN, leerPANEL);
 function leerCFE() {
     gpio.read(40, function(err, value) {
         console.log('The value 40 is ' + value);
+				socket.emit('statusCFE', value);
     });
 }
 
 function leerPANEL() {
     gpio.read(37, function(err, value) {
         console.log('The value 37 is ' + value);
+				socket.emit('statusPANEL', value);
     });
 }
 
