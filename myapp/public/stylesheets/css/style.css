@@ -10,6 +10,10 @@ img.tam{
   height: 100px;
 }
 
+#fondo{
+  background-color: #CDCDCD;
+}
+
 #side-menu {
     background-color: #2f4050;
     padding: 0px;
