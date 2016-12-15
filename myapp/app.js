@@ -133,7 +133,6 @@ MongoClient.connect(url, function(err, db) {
 });
 
 //PRUEBAS
-gpio.setup(24, gpio.DIR_IN, readInput);
 
 gpio.on('change', function(channel, value) {
     console.log('Channel ' + channel + ' value is now ' + value);
