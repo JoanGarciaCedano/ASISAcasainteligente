@@ -5,6 +5,11 @@ html, body {
     width: 100%;
 }
 
+#tam{
+  width: 100px;
+  height: 100px;
+}
+
 #side-menu {
     background-color: #2f4050;
     padding: 0px;
