@@ -10,7 +10,7 @@
     integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
     <!--Este es el link para Bootstrap Local-->
-    <link href="stylesheets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="stylesheets/css/bootstrap.css" rel="stylesheet">
     <link href="stylesheets/css/style.css" rel="stylesheet">
 
    <!-- Importamos el módulo socket.io -->
@@ -19,6 +19,46 @@
    <script src="http://code.highcharts.com/stock/highstock.js"></script>
    <script src="http://code.highcharts.com/modules/exporting.js"></script>
 
+
+   <script type=text/javascript src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+    <script>
+        var socket = io.connect();
+        socket.on('statusRelay3', function (value) {
+          if(value == 1){
+            document.getElementById("estado1").innerHTML = "Encendida";
+          }else{
+            document.getElementById("estado1").innerHTML = "Apagada";
+          }
+        });
+        socket.on('statusRelay4', function (value) {
+          if(value ==1){
+            document.getElementById("estado2").innerHTML = "Encendida";
+          }else{
+            document.getElementById("estado2").innerHTML = "Apagada";
+          }
+        });
+    </script>
+
+    <script>
+    function relay3On(){
+      socket.emit('relay3', 'on');
+       	document.getElementById("estado1").innerHTML = "Encendida";
+    }
+    function relay3Off(){
+      socket.emit('relay3', 'off');
+	     document.getElementById("estado1").innerHTML = "Apagada";
+    }
+    function relay4On(){
+      socket.emit('relay4', 'on');
+	    document.getElementById("estado2").innerHTML = "Encendida";
+    }
+    function relay4Off(){
+      socket.emit('relay4', 'off');
+	    document.getElementById("estado2").innerHTML = "Apagada";
+    }
+    </script>
+
   </head>
 
   <body>
@@ -26,18 +66,18 @@
       <div class="row display-table-row">
         <!--side menu -->
           <div class="col-md-2 col-sm-2 hidden-xs display-table-cell valign-top" id="side-menu">
-    	     <ul>
+    	    <ul>
     	      <li class="link">
     	        <a href="index.html">
                 <span aria-hidden="true" ></span>
-    		        <span class="hidden-xs hidden-sm">Dashboard</span>
-    		      </a>
+          		  <span class="hidden-xs hidden-sm">Dashboard</span>
+          		  </a>
     	      </li>
 
-    	      <li class="link active">
+    	      <li class="link">
     	        <a href="#collapse-post" data-toggle="collapse" aria-controls="collapse-post">
                 <span aria-hidden="true"  ></span>
-    		        <span class="hidden-xs hidden-sm">Monitoréo RaspBerry</span>
+    		        <span class="hidden-xs hidden-sm">Monitoréo Raspberry</span>
     		      </a>
     	        <ul class="collapse collapsable" id="collapse-post">
 	          <li>
@@ -52,10 +92,10 @@
     	      <li class="link">
     	        <a href="#collapse-comments" data-toggle="collapse" aria-controls="collapse-comments">
                 <span aria-hidden="true" ></span>
-    		        <span class="hidden-xs hidden-sm">Monitoréo del Hogar</span>
-    		      </a>
+          		  <span class="hidden-xs hidden-sm">Monitoréo del Hogar</span>
+          		</a>
     		<ul class="collapse collapsable" id="collapse-comments">
-	    	   <li>
+	    	  <li>
 	    	    <a href="tempHumHogar.html">Temperatura y Humedad</a>
 	    	  </li>
 
@@ -65,24 +105,24 @@
     		</ul>
     	      </li>
 
-    	      <li class="link">
+    	  <li class="link active">
     	        <a href="#collapse-controlcasa" data-toggle="collapse" aria-controls="collapse-controlcasa">
                 <span aria-hidden="true"  ></span>
     		        <span class="hidden-xs hidden-sm">Control del Hogar</span>
     		      </a>
     	        <ul class="collapse collapsable" id="collapse-controlcasa">
-	    	    <li>
-	    	        <a href="iluminacion.html">Iluminación</a>
-	    	    </li>
+	    	  <li>
+	    	    <a href="iluminacion.html">Iluminación</a>
+	    	  </li>
 
-  	    	  <li>
-  	    	    <a href="bombaAgua.html">Bomba de Agua</a>
-  	    	  </li>
-    		  </ul>
-    	      </li>
+	    	  <li>
+	    	    <a href="bombaAgua.html">Bomba de Agua</a>
+	    	  </li>
+    		</ul>
+    	</li>
 
     	      <li class="link settings-btn">
-              <a href="energia.html">
+          	  <a href="energia.html">
           		  <span aria-hidden="true" class= ></span>
           		  <span class="hidden-xs hidden-sm">Energía Eléctrica</span>
           		</a>
@@ -93,11 +133,20 @@
 
           <!-- CONTENIDO DEL MAIN -->
 
-	  <div class="col-md-10 col-sm-10 display-table-cell valign-top">
+          <div class="col-md-10 col-sm-10 display-table-cell valign-top">
             <div class="row">
               <header id="nav-header" class="clearfix">
+      		        <nav class="navbar-default pull-left">
+          	    	  <button type="button" class="navbar-toggle collapsed" data-toggle="offcanvas" data-target="#side-menu" aria-expanded="false">
+          		      <span class="sr-only">Toggle navigation</span>
+          		      <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+          		      <span class="icon-bar"></span>
+      		          </button>
+      	    	    </nav>
+
                 <div class="col-md-11">
-                        <center><h1>Monitoreo de la Memoria de la RaspBerry Pi</h1></center>
+                        <center><h1>Control de Bombas de Agua del Hogar</h1></center>
                 </div>
 
                 <div class="col-md-1">
@@ -111,23 +160,32 @@
                 <hr>
             </div>
 
+	     <div class="row">
+		<center><h4>Bomba de Agua de la Alberca</h4></center>
+		<center><h4 id="estado1">Estado</h4></center>
+	    </div>
  	    <div class="row">
-	      <div id="chartMemory" style="min-width: 100; height:250px; margin: 0 auto"></div>
-            </div>
+		<div class="jumbotron" id="jumbo1">
+	      	  <center><input class="btn btn-success btn-lg" type="button" name="on" id="onButton" value="Prender" onClick="relay3On();">
+	     	  <input class="btn btn-danger btn-lg" type="button" name="on" id="offButton" value="Apagar" onClick="relay3Off();"></center>
+            	</div>
+	    </div>
 
 	    <hr>
 
-	    <div class="row">
- 	      <ul class="list-group">
-		<li class="list-group-item list-group-item-danger"><strong>Usada: </strong>Indica el porcentaje de memoria RAM usada en este momento por la RaspBerry</li>
-		<li class="list-group-item list-group-item-success"><strong>Libre: </strong>Indica el porcentaje de memoria RAM libre en este momento por la RaspBerry </li>
-		<li class="list-group-item list-group-item-info"><strong>En Buffer: </strong>Indica el porcentaje de memoria RAM en buffer en este momento por la RaspBerry </li>
- 		<li class="list-group-item list-group-item-warning"><strong>En Cache: </strong>Indica el porcentaje de memoria RAM en cache en este momento por la RaspBerry</li>
-              </ul>
+	     <div class="row">
+		<center><h4>Bomba de Agua del Tinaco</h4></center>
+		<center><h4 id="estado2">Estado</h4></center>
 	    </div>
-
-	    <br>
-
+	    <div class="row">
+	      <div class="jumbotron" id="jumbo2">
+          <center><h2>
+            El temporizador de la bomba está en automatico para que a las 4:00 pm encienda y a las 5:00 pm se apague
+          </h2></center>
+	        <!--<center><input class="btn btn-success btn-lg" type="button" name="on" id="onButton" value="Prender" onClick="relay4On();">
+	        <input class="btn btn-danger btn-lg" type="button" name="on" id="offButton" value="Apagar" onClick="relay4Off();"></center>-->
+	      </div>
+            </div>
 
 	  <footer id="admin-footer" class="clearfix">
 	    <div class="pull-left">
@@ -141,73 +199,6 @@
 	 </div>
 		      <!--TERMINA CONTENIDO DE LOS COMPONENTES-->
 
-
-<!-- Comienza el Javascript -->
-    <script>
-    // Creo un WebSocket. ¡Poned la IP de vuestra Raspberry Pi!
-    var socket = io.connect('http://'+ location.host);
-    // console.log(location.host)
-    // Creo un nuevo objeto 'Chart'
-    var chart, chartCPU, chartHum, chartTemp, chartMem, memTotal, chartProx;
-
-
-chartMem = new Highcharts.Chart({
-            chart: {
-                renderTo: 'chartMemory',
-                type: 'bar',
-                events: {
-                load: function() {
-                    // Cada vez que reciba un valor desde el socket, lo meto en la gráfica
-                    socket.on('memoryUpdate', function (free, used, buffered, cached) {
-                        chartMem.series[0].setData([
-                          {y: used, color: 'red'},
-                          {y: free, color: 'green'},
-                          {y: buffered, color: 'blue'},
-                          {y: cached, color: 'orange'}
-                        ]);
-                      });
-                    }
-                  }
-            },
-            title: {
-                text: 'Memoria '
-            },
-            xAxis: {
-                categories: ['Usada', 'Libre', 'En Buffer', 'En Cache'],
-                title: {
-                    text: null
-                }
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: "Porcentaje",
-                    align: 'high'
-                },
-                labels: {
-                    overflow: 'justify'
-                }
-            },
-            tooltip: {
-                valueSuffix: ' %'
-            },
-            plotOptions: {
-                bar: {
-                    dataLabels: {
-                        enabled: true
-                    }
-                }
-            },
-            credits: {
-                enabled: false
-            },
-            series: [{
-                name: "Memoria",
-                data: [{y: 0, color: 'red'}, {y: 0, color: 'green'}, {y: 0, color: 'blue'}, {y: 0, color: 'orange'}]
-            }]
-        });
-
-    </script>
 
     <!--Este es el archivo local de Jquery-->
     <script src="javascripts/js/jquery-1.12.4.min.js"></script>
