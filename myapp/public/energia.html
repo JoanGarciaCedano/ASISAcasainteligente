@@ -1,209 +1,214 @@
 <html class="no-js" lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>ASISA Smart House</title>
 
     <!-- Bootstrap desde la NUBE-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-    integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <!--Este es el link para Bootstrap Local-->
     <link href="stylesheets/css/bootstrap.css" rel="stylesheet">
     <link href="stylesheets/css/style.css" rel="stylesheet">
 
-   <!-- Importamos el módulo socket.io -->
-   <script src="/socket.io/socket.io.js"></script>
-
-   <script src="http://code.highcharts.com/stock/highstock.js"></script>
-   <script src="http://code.highcharts.com/modules/exporting.js"></script>
-
-
-   <script type=text/javascript src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <!-- Importamos el módulo socket.io -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="http://code.highcharts.com/stock/highstock.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+    <script type=text/javascript src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 
     <script>
         var socket = io.connect();
-        socket.on('statusRelay3', function (value) {
-          if(value == 1){
-            document.getElementById("estado1").innerHTML = "Encendida";
-          }else{
-            document.getElementById("estado1").innerHTML = "Apagada";
-          }
+        socket.on('statusRelay3', function(value) {
+            if (value == 1) {
+                document.getElementById("estado1").innerHTML = "Encendida";
+            } else {
+                document.getElementById("estado1").innerHTML = "Apagada";
+            }
         });
-        socket.on('statusRelay4', function (value) {
-          if(value ==1){
-            document.getElementById("estado2").innerHTML = "Encendida";
-          }else{
-            document.getElementById("estado2").innerHTML = "Apagada";
-          }
+        socket.on('statusRelay4', function(value) {
+            if (value == 1) {
+                document.getElementById("estado2").innerHTML = "Encendida";
+            } else {
+                document.getElementById("estado2").innerHTML = "Apagada";
+            }
         });
     </script>
 
     <script>
-    function relay3On(){
-      socket.emit('relay3', 'on');
-       	document.getElementById("estado1").innerHTML = "Encendida";
-    }
-    function relay3Off(){
-      socket.emit('relay3', 'off');
-	     document.getElementById("estado1").innerHTML = "Apagada";
-    }
-    function relay4On(){
-      socket.emit('relay4', 'on');
-	    document.getElementById("estado2").innerHTML = "Encendida";
-    }
-    function relay4Off(){
-      socket.emit('relay4', 'off');
-	    document.getElementById("estado2").innerHTML = "Apagada";
-    }
+        function relay3On() {
+            socket.emit('relay3', 'on');
+            document.getElementById("estado1").innerHTML = "Encendida";
+        }
+
+        function relay3Off() {
+            socket.emit('relay3', 'off');
+            document.getElementById("estado1").innerHTML = "Apagada";
+        }
+
+        function relay4On() {
+            socket.emit('relay4', 'on');
+            document.getElementById("estado2").innerHTML = "Encendida";
+        }
+
+        function relay4Off() {
+            socket.emit('relay4', 'off');
+            document.getElementById("estado2").innerHTML = "Apagada";
+        }
     </script>
 
-  </head>
+</head>
 
-  <body>
+<body>
     <div class="container-fluid display-table">
-      <div class="row display-table-row">
-        <!--side menu -->
-          <div class="col-md-2 col-sm-2 hidden-xs display-table-cell valign-top" id="side-menu">
-    	    <ul>
-    	      <li class="link">
-    	        <a href="index.html">
-                <span aria-hidden="true" ></span>
-          		  <span class="hidden-xs hidden-sm">Dashboard</span>
-          		  </a>
-    	      </li>
-
-    	      <li class="link">
-    	        <a href="#collapse-post" data-toggle="collapse" aria-controls="collapse-post">
-                <span aria-hidden="true"  ></span>
-    		        <span class="hidden-xs hidden-sm">Monitoréo Raspberry</span>
-    		      </a>
-    	        <ul class="collapse collapsable" id="collapse-post">
-	          <li>
-	    	    <a href="memoriaRaspBerry.html">Memoria RaspBerry</a>
-	          </li>
-	    	  <li>
-	    	    <a href="tempCPU.html">Temperatura y CPU</a>
-	    	  </li>
-    	        </ul>
-              </li>
-
-    	      <li class="link">
-    	        <a href="#collapse-comments" data-toggle="collapse" aria-controls="collapse-comments">
-                <span aria-hidden="true" ></span>
-          		  <span class="hidden-xs hidden-sm">Monitoréo del Hogar</span>
-          		</a>
-    		<ul class="collapse collapsable" id="collapse-comments">
-	    	  <li>
-	    	    <a href="tempHumHogar.html">Temperatura y Humedad</a>
-	    	  </li>
-
-	    	  <li>
-	    	    <a href="gas.html">Detector de Gas</a>
-	    	  </li>
-    		</ul>
-    	      </li>
-
-    	  <li class="link active">
-    	        <a href="#collapse-controlcasa" data-toggle="collapse" aria-controls="collapse-controlcasa">
-                <span aria-hidden="true"  ></span>
-    		        <span class="hidden-xs hidden-sm">Control del Hogar</span>
-    		      </a>
-    	        <ul class="collapse collapsable" id="collapse-controlcasa">
-	    	  <li>
-	    	    <a href="iluminacion.html">Iluminación</a>
-	    	  </li>
-
-	    	  <li>
-	    	    <a href="bombaAgua.html">Bomba de Agua</a>
-	    	  </li>
-    		</ul>
-    	</li>
-
-    	      <li class="link settings-btn">
-          	  <a href="energia.html">
-          		  <span aria-hidden="true" class= ></span>
-          		  <span class="hidden-xs hidden-sm">Energía Eléctrica</span>
-          		</a>
-    	      </li>
-    	    </ul>
-          </div>
-
-
-          <!-- CONTENIDO DEL MAIN -->
-
-          <div class="col-md-10 col-sm-10 display-table-cell valign-top">
-            <div class="row">
-              <header id="nav-header" class="clearfix">
-
-                <div class="col-md-11">
-                        <center><h1>Monitoreo y Control de Energía Eléctrica (para UPS)</h1></center>
-                </div>
-
-                <div class="col-md-1">
-                  <ul class="pull-right">
-                    <li>
-                        <center><img src="/images/logoasisa.png" alt="ASISA" style="width:50px;height:50px;"></center>
+        <div class="row display-table-row">
+            <!--side menu -->
+            <div class="col-md-2 col-sm-2 hidden-xs display-table-cell valign-top" id="side-menu">
+                <ul>
+                    <li class="link">
+                        <a href="index.html">
+                            <span aria-hidden="true"></span>
+                            <span class="hidden-xs hidden-sm">Dashboard</span>
+                        </a>
                     </li>
-                  </ul>
-                </div>
-              </header>
-                <hr>
+
+                    <li class="link">
+                        <a href="#collapse-post" data-toggle="collapse" aria-controls="collapse-post">
+                            <span aria-hidden="true"></span>
+                            <span class="hidden-xs hidden-sm">Monitoréo Raspberry</span>
+                        </a>
+                        <ul class="collapse collapsable" id="collapse-post">
+                            <li>
+                                <a href="memoriaRaspBerry.html">Memoria RaspBerry</a>
+                            </li>
+                            <li>
+                                <a href="tempCPU.html">Temperatura y CPU</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="link">
+                        <a href="#collapse-comments" data-toggle="collapse" aria-controls="collapse-comments">
+                            <span aria-hidden="true"></span>
+                            <span class="hidden-xs hidden-sm">Monitoréo del Hogar</span>
+                        </a>
+                        <ul class="collapse collapsable" id="collapse-comments">
+                            <li>
+                                <a href="tempHumHogar.html">Temperatura y Humedad</a>
+                            </li>
+
+                            <li>
+                                <a href="gas.html">Detector de Gas</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="link active">
+                        <a href="#collapse-controlcasa" data-toggle="collapse" aria-controls="collapse-controlcasa">
+                            <span aria-hidden="true"></span>
+                            <span class="hidden-xs hidden-sm">Control del Hogar</span>
+                        </a>
+                        <ul class="collapse collapsable" id="collapse-controlcasa">
+                            <li>
+                                <a href="iluminacion.html">Iluminación</a>
+                            </li>
+
+                            <li>
+                                <a href="bombaAgua.html">Bomba de Agua</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="link settings-btn">
+                        <a href="energia.html">
+                            <span aria-hidden="true" class=></span>
+                            <span class="hidden-xs hidden-sm">Energía Eléctrica</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
 
-	     <div class="row">
-		<center><h4>Bomba de Agua de la Alberca</h4></center>
-		<center><h4 id="estado1">Estado</h4></center>
-	    </div>
- 	    <div class="row">
-		<div class="jumbotron" id="jumbo1">
-	      	  <center><input class="btn btn-success btn-lg" type="button" name="on" id="onButton" value="Prender" onClick="relay3On();">
-	     	  <input class="btn btn-danger btn-lg" type="button" name="on" id="offButton" value="Apagar" onClick="relay3Off();"></center>
-            	</div>
-	    </div>
 
-	    <hr>
+            <!-- CONTENIDO DEL MAIN -->
 
-	     <div class="row">
-		<center><h4>Bomba de Agua del Tinaco</h4></center>
-		<center><h4 id="estado2">Estado</h4></center>
-	    </div>
-	    <div class="row">
-	      <div class="jumbotron" id="jumbo2">
-          <center><h2>
+            <div class="col-md-10 col-sm-10 display-table-cell valign-top">
+                <div class="row">
+                    <header id="nav-header" class="clearfix">
+
+                        <div class="col-md-11">
+                            <center>
+                                <h1>Monitoréo y Control de Energía Eléctrica (para UPS)</h1></center>
+                        </div>
+
+                        <div class="col-md-1">
+                            <ul class="pull-right">
+                                <li>
+                                    <center><img src="/images/logoasisa.png" alt="ASISA" style="width:50px;height:50px;"></center>
+                                </li>
+                            </ul>
+                        </div>
+                    </header>
+                    <hr>
+                </div>
+
+                <div class="row">
+                    <center>
+                        <h4>Bomba de Agua de la Alberca</h4></center>
+                    <center>
+                        <h4 id="estado1">Estado</h4></center>
+                </div>
+                <div class="row">
+                    <div class="jumbotron" id="jumbo1">
+                        <center><input class="btn btn-success btn-lg" type="button" name="on" id="onButton" value="Prender" onClick="relay3On();">
+                            <input class="btn btn-danger btn-lg" type="button" name="on" id="offButton" value="Apagar" onClick="relay3Off();"></center>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <center>
+                        <h4>Bomba de Agua del Tinaco</h4></center>
+                    <center>
+                        <h4 id="estado2">Estado</h4></center>
+                </div>
+                <div class="row">
+                    <div class="jumbotron" id="jumbo2">
+                        <center>
+                            <h2>
             El temporizador de la bomba está en automatico para que a las 4:00 pm encienda y a las 5:00 pm se apague
           </h2></center>
-	        <!--<center><input class="btn btn-success btn-lg" type="button" name="on" id="onButton" value="Prender" onClick="relay4On();">
+                        <!--<center><input class="btn btn-success btn-lg" type="button" name="on" id="onButton" value="Prender" onClick="relay4On();">
 	        <input class="btn btn-danger btn-lg" type="button" name="on" id="offButton" value="Apagar" onClick="relay4Off();"></center>-->
-	      </div>
+                    </div>
+                </div>
+
+                <footer id="admin-footer" class="clearfix">
+                    <div class="pull-left">
+                        <b>Copyright </b>&copy; 2016
+                    </div>
+
+                    <div class="pull-right">
+                        <b>Grupo CCred</b>
+                    </div>
+                </footer>
             </div>
-
-	  <footer id="admin-footer" class="clearfix">
-	    <div class="pull-left">
-	      <b>Copyright </b>&copy; 2016
-	    </div>
-
-	    <div class="pull-right">
-	      <b>Grupo CCred</b>
-	    </div>
-	  </footer>
-	 </div>
-		      <!--TERMINA CONTENIDO DE LOS COMPONENTES-->
+            <!--TERMINA CONTENIDO DE LOS COMPONENTES-->
 
 
-    <!--Este es el archivo local de Jquery-->
-    <script src="javascripts/js/jquery-1.12.4.min.js"></script>
+            <!--Este es el archivo local de Jquery-->
+            <script src="javascripts/js/jquery-1.12.4.min.js"></script>
 
-    <!--Este es el archivo local de Bootstrap.js-->
-    <script src="javascripts/js/bootstrap.min.js"></script>
+            <!--Este es el archivo local de Bootstrap.js-->
+            <script src="javascripts/js/bootstrap.min.js"></script>
 
-    <!--Este es el archivo en la NUBE de Bootstrap JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
-    integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+            <!--Este es el archivo en la NUBE de Bootstrap JavaScript -->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 
-    <!--Este es el archivo para el Script del panel-->
-    <script src="javascripts/panelScript.js"></script>
-  </body>
+            <!--Este es el archivo para el Script del panel-->
+            <script src="javascripts/panelScript.js"></script>
+</body>
+
 </html>
