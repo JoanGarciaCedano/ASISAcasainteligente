@@ -134,11 +134,13 @@ MongoClient.connect(url, function(err, db) {
 
 //PRUEBAS
 
-gpio.on('change', function(channel, value) {
-    console.log('Channel ' + channel + ' value is now ' + value);
-});
-gpio.setup(24, gpio.DIR_IN, gpio.EDGE_BOTH);
+gpio.setup(40, gpio.DIR_IN, readInput);
 
+function readInput() {
+    gpio.read(40, function(err, value) {
+        console.log('The value is ' + value);
+    });
+}
 
 //Establecemos una conexión cuando se abra el navegador
 io.sockets.on('connection', function(socket) {
