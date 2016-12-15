@@ -60,6 +60,7 @@ html, body {
 }
 
 #side-menu .settings-btnactive {
+		color: #fff;
     background-color: #FF8A31;
 }
 

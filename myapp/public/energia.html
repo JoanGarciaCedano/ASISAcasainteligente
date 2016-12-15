@@ -20,7 +20,7 @@
 
     <script>
         var socket = io.connect();
-        socket.on('statusRelay3', function(value) {
+        /*socket.on('statusRelay3', function(value) {
             if (value == 1) {
                 document.getElementById("estado1").innerHTML = "Encendida";
             } else {
@@ -33,29 +33,29 @@
             } else {
                 document.getElementById("estado2").innerHTML = "Apagada";
             }
-        });
+        });*
     </script>
 
     <script>
-        function relay3On() {
-            socket.emit('relay3', 'on');
-            document.getElementById("estado1").innerHTML = "Encendida";
-        }
+        /*function relay3On() {
+                    socket.emit('relay3', 'on');
+                    document.getElementById("estado1").innerHTML = "Encendida";
+                }
 
-        function relay3Off() {
-            socket.emit('relay3', 'off');
-            document.getElementById("estado1").innerHTML = "Apagada";
-        }
+                function relay3Off() {
+                    socket.emit('relay3', 'off');
+                    document.getElementById("estado1").innerHTML = "Apagada";
+                }
 
-        function relay4On() {
-            socket.emit('relay4', 'on');
-            document.getElementById("estado2").innerHTML = "Encendida";
-        }
+                function relay4On() {
+                    socket.emit('relay4', 'on');
+                    document.getElementById("estado2").innerHTML = "Encendida";
+                }
 
-        function relay4Off() {
-            socket.emit('relay4', 'off');
-            document.getElementById("estado2").innerHTML = "Apagada";
-        }
+                function relay4Off() {
+                    socket.emit('relay4', 'off');
+                    document.getElementById("estado2").innerHTML = "Apagada";
+                }*/
     </script>
 
 </head>
@@ -153,15 +153,15 @@
                 </div>
 
                 <div class="row">
-                    <center>
-                        <h4>Bomba de Agua de la Alberca</h4></center>
-                    <center>
-                        <h4 id="estado1">Estado</h4></center>
-                </div>
-                <div class="row">
-                    <div class="jumbotron" id="jumbo1">
-                        <center><input class="btn btn-success btn-lg" type="button" name="on" id="onButton" value="Prender" onClick="relay3On();">
-                            <input class="btn btn-danger btn-lg" type="button" name="on" id="offButton" value="Apagar" onClick="relay3Off();"></center>
+                    <div class="col-sm-6 col-md-4">
+                        <div class="thumbnail">
+                            <img src="img/cfe.png" alt="...">
+                            <div class="caption">
+                                <h3>Thumbnail label</h3>
+                                <p>...</p>
+                                <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
