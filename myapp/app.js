@@ -135,11 +135,10 @@ MongoClient.connect(url, function(err, db) {
 //PRUEBAS
 gpio.setup(24, gpio.DIR_IN, readInput);
 
-function readInput() {
-    gpio.read(24, function(err, value) {
-        console.log('El valor del pin 24 es!! ' + value);
-    });
-}
+gpio.on('change', function(24, value) {
+    console.log('Channel ' + channel + ' value is now ' + value);
+});
+gpio.setup(24, gpio.DIR_IN, gpio.EDGE_BOTH);
 
 
 //Establecemos una conexión cuando se abra el navegador
