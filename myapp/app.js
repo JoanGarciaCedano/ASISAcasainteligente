@@ -134,14 +134,19 @@ MongoClient.connect(url, function(err, db) {
 
 //PRUEBAS
 
-gpio.setup(40, gpio.DIR_IN, readInput);
+//gpio.setup(40, gpio.DIR_IN, readInput);
 gpio.setup(37, gpio.DIR_IN, readInput2);
 
-function readInput() {
+gpio.on('change', function(channel, value) {
+    console.log('Canal ' + channel + ' su valor es: ' + value);
+});
+gpio.setup(40, gpio.DIR_IN, gpio.EDGE_BOTH);
+
+/*function readInput() {
     gpio.read(40, function(err, value) {
         console.log('The value 40 is ' + value);
     });
-}
+}*/
 
 function readInput2() {
     gpio.read(37, function(err, value) {
