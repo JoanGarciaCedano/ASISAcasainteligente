@@ -132,23 +132,17 @@ MongoClient.connect(url, function(err, db) {
     });
 });
 
-//PRUEBAS
+//Lectura de Energía Electrica
+gpio.setup(40, gpio.DIR_IN, leerCFE);
+gpio.setup(37, gpio.DIR_IN, leerPANEL);
 
-//gpio.setup(40, gpio.DIR_IN, readInput);
-gpio.setup(37, gpio.DIR_IN, readInput2);
-
-gpio.on('change', function(channel, value) {
-    console.log('Canal ' + channel + ' su valor es: ' + value);
-});
-gpio.setup(40, gpio.DIR_IN, gpio.EDGE_BOTH);
-
-/*function readInput() {
+function leerCFE() {
     gpio.read(40, function(err, value) {
         console.log('The value 40 is ' + value);
     });
-}*/
+}
 
-function readInput2() {
+function leerPANEL() {
     gpio.read(37, function(err, value) {
         console.log('The value 37 is ' + value);
     });
@@ -184,6 +178,11 @@ io.sockets.on('connection', function(socket) {
     socket.on('disconnect', function() {
         console.log("La dirección: " + direccion + ":" + puerto + " se ha desconectado de la aplicación");
     });
+
+		setInterval(function() {
+      leerCFE();
+			leerPANEL();
+    }, 2000);
 
     //Funcion para recuperar los valores de los Relays almacenados en la base de datos
     //Posteriormente se emiten por socket.io a las vistas para cambiar los labels
