@@ -135,7 +135,7 @@ MongoClient.connect(url, function(err, db) {
 //PRUEBAS
 
 gpio.setup(40, gpio.DIR_IN, readInput);
-gpio.setup(24, gpio.DIR_IN, readInput2);
+gpio.setup(37, gpio.DIR_IN, readInput2);
 
 function readInput() {
     gpio.read(40, function(err, value) {
@@ -144,8 +144,8 @@ function readInput() {
 }
 
 function readInput2() {
-    gpio.read(24, function(err, value) {
-        console.log('The value 24 is ' + value);
+    gpio.read(37, function(err, value) {
+        console.log('The value 37 is ' + value);
     });
 }
 
