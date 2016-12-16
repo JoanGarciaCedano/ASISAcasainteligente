@@ -136,12 +136,20 @@ MongoClient.connect(url, function(err, db) {
 io.sockets.on('connection', function(socket) {
 
     //Lectura de Energía Electrica
-    gpio.setup(31, gpio.DIR_IN, leerCFE);
-    gpio.setup(33, gpio.DIR_IN, leerPANEL);
+    gpio.setup(33, gpio.DIR_IN, leerCFE);
+
+    gpio.setup(31, gpio.DIR_OUT, write);
+
+    function write() {
+        gpio.write(31, true, function(err) {
+            if (err) throw err;
+            console.log('Written to pin');
+        });
+    }
 
 
     function leerCFE() {
-        gpio.read(31, function(err, value) {
+        gpio.read(33, function(err, value) {
           valorCFE = value;
           socket.emit("statusCFE", value);
           console.log("CFE: "+valorCFE);
@@ -149,14 +157,14 @@ io.sockets.on('connection', function(socket) {
         });
     }
 
-    function leerPANEL() {
+    /*function leerPANEL() {
         gpio.read(33, function(err, value) {
           valorPANEL = value;
           socket.emit("statusPANEL", value);
           console.log("PANEL: "+valorPANEL);
           return valorPANEL;
         });
-    }
+    }*/
 
     function alimencacionUPS(signalCFE,signalPANEL){
 
