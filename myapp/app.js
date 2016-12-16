@@ -142,18 +142,19 @@ io.sockets.on('connection', function(socket) {
 
   function leerCFE() {
       gpio.read(40, function(err, value) {
-          //console.log('The value 40 is ' + value); -->test
+          console.log('The value 40 is ' + value);
       });
   }
 
   function leerPANEL() {
       gpio.read(37, function(err, value) {
-          //console.log('The value 37 is ' + value); -->test
+          console.log('The value 37 is ' + value);
       });
   }
 
-  console.log("valor PIN 40 "+gpio.setup(40, gpio.DIR_IN, leerCFE));
-  console.log("valor PIN 37 "+gpio.setup(37, gpio.DIR_IN, leerPANEL));
+gpio.setup(40, gpio.DIR_IN, leerCFE);
+gpio.setup(37, gpio.DIR_IN, leerPANEL);
+
 
 
     //Variables para memoria
