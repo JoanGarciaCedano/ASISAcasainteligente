@@ -138,24 +138,20 @@ io.sockets.on('connection', function(socket) {
 
 
   //Lectura de Energía Electrica
-  function leerCFE() {
       gpio.setup(40, gpio.DIR_IN);
+
       gpio.read(40, function(err, value) {
         return value;
         console.log(value);
       });
-  }
 
-  function leerPANEL() {
       gpio.setup(37, gpio.DIR_IN);
+
       gpio.read(37, function(err, value) {
           return value;
           console.log(value);
       });
-  }
 
-leerCFE();
-leerPANEL();
 
     //Variables para memoria
     var memTotal;
