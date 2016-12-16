@@ -142,20 +142,16 @@ io.sockets.on('connection', function(socket) {
 
 
   function leerCFE() {
-      gpio.read(40, function(err, value) {
-      socket.emit("statusCFE", value);
-      });
+      gpio.read(40, value);
   }
 
   function leerPANEL() {
-      gpio.read(37, function(err, value) {
-      socket.emit("statusPANEL", value);
-      });
+      gpio.read(37, value);
   }
 
   setInterval(function() {
-      leerCFE();
-      leerPANEL();
+      console.log(leerCFE());
+      console.log(leerPANEL());
   }, 1000);
 
 
