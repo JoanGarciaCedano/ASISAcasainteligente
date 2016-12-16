@@ -137,20 +137,19 @@ MongoClient.connect(url, function(err, db) {
 io.sockets.on('connection', function(socket) {
 
   //Lectura de Energía Electrica
-  gpio.setup(40, gpio.DIR_IN, leerCFE);
-  gpio.setup(37, gpio.DIR_IN, leerPANEL);
-
   function leerCFE() {
+      gpio.setup(40, gpio.DIR_IN);
       gpio.read(40, function(err, value) {
           //console.log('The value 40 is ' + value); -->test
-          return;
+          return value;
       });
   }
 
   function leerPANEL() {
+      gpio.setup(37, gpio.DIR_IN);
       gpio.read(37, function(err, value) {
           //console.log('The value 37 is ' + value); -->test
-          return;
+          return value;
       });
   }
 
