@@ -160,20 +160,20 @@ io.sockets.on('connection', function(socket) {
     }
 
     function alimencacionUPS(signalCFE,signalPANEL){
-      
+
         if(signalCFE == true && signalPANEL == true){
-          relay1.writeSync(1);
+          relay3.writeSync(1);
           relay2.writeSync(0);
         }
         if(signalCFE == true && signalPANEL == false){
-          relay1.writeSync(1);
+          relay3.writeSync(1);
           relay2.writeSync(0);
         }
         if(signalCFE == false && signalPANEL == true){
-          relay1.writeSync(0);
+          relay3.writeSync(0);
           relay2.writeSync(1);
         }else{
-          relay1.writeSync(0);
+          relay3.writeSync(0);
           relay2.writeSync(0);
           console.log("NO CUENTA CON ENERGÍA ELECTRICA");
         }
