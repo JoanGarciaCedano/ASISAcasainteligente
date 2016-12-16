@@ -107,7 +107,7 @@ var relay3 = new GPIOS(19, 'out'); //GPIO numero 19
 var relay4 = new GPIOS(20, 'out'); //GPIO numero 20
 
 //Funcion para recuperar el estado de los relevadores desde MongoDB
-
+/*
 var estadoRelay = function(db, callback) {
     var cursor = db.collection('raspberry').find();
 
@@ -132,7 +132,7 @@ MongoClient.connect(url, function(err, db) {
         db.close();
     });
 });
-
+*/
 
 
 var valorCFE = null;
@@ -223,6 +223,7 @@ io.sockets.on('connection', function(socket) {
 
     //Funcion para recuperar los valores de los Relays almacenados en la base de datos
     //Posteriormente se emiten por socket.io a las vistas para cambiar los labels
+/*
     var mandarRelay = function(db, callback) {
         var cursor = db.collection('raspberry').find();
         cursor.each(function(err, doc) {
@@ -352,7 +353,7 @@ io.sockets.on('connection', function(socket) {
             });
         }); //MongoClient
     }, 2000);
-
+*/
 
 
     // Funcion para revisar el estado de la memoria
