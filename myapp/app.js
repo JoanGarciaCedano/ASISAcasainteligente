@@ -159,12 +159,29 @@ io.sockets.on('connection', function(socket) {
         });
     }
 
+    function alimencacionUPS(signalCFE,signalPANEL){
+        if(signalCFE == true && signalPANEL == true){
+          relay1.writeSync(1);
+          relay2.writeSync(0);
+        }
+        if(signalCFE == true && signalPANEL == false){
+          relay1.writeSync(1);
+          relay2.writeSync(0);
+        }
+        if(signalCFE == false && signalPANEL == true){
+          relay1.writeSync(0);
+          relay2.writeSync(1);
+        }else{
+          relay1.writeSync(0);
+          relay2.writeSync(0);
+          console.log("NO CUENTA CON ENERGÍA ELECTRICA");
+        }
+    }
 
     setInterval(function() {
       leerCFE();
       leerPANEL();
-      console.log("dato1 "+valorCFE);
-      console.log("dato2 "+valorPANEL);
+      alimencacionUPS(valorCFE,valorPANEL);
     }, 1000);
 
 
