@@ -148,6 +148,7 @@ io.sockets.on('connection', function(socket) {
           valorCFE = value;
           //socket.emit("statusCFE", va;lue);
           console.log("CFE: "+valorCFE);
+          return valorCFE;
         });
     }
 
@@ -156,6 +157,7 @@ io.sockets.on('connection', function(socket) {
           valorPANEL = value;
           //socket.emit("statusPANEL", value);
           console.log("PANEL: "+valorPANEL);
+          return valorPANEL;
         });
     }
 
