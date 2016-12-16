@@ -146,22 +146,25 @@ io.sockets.on('connection', function(socket) {
     function leerCFE() {
         gpio.read(40, function(err, value) {
           var pedo1 = value;
-          return pedo1;
+          socket.emit("statusCFE", value);
         });
     }
 
     function leerPANEL() {
         gpio.read(37, function(err, value) {
           var pedo2 = value;
-            return pedo2;
+          socket.emit("statusPANEL", value);
         });
     }
 
     setInterval(function() {
-        console.log(leerCFE());
-        console.log(leerPANEL());
+      leerCFE();
+      leerPANEL();
     }, 1000);
 
+
+    console.log(pedo1+"sa");
+    console.log(pedo2+"we");
     //Variables para memoria
     var memTotal;
     var memUsed = 0;
