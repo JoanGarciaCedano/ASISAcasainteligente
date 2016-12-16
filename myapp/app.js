@@ -143,15 +143,20 @@ io.sockets.on('connection', function(socket) {
 
   function leerCFE() {
       gpio.read(40, function(err, value) {
-        console.log(value);
+        return value;
       });
   }
 
   function leerPANEL() {
       gpio.read(37, function(err, value) {
-          console.log(value);
+        return value;
       });
   }
+
+  setInterval(function() {
+      console.log(leerCFE());
+      console.log(leerPANEL());
+  }, 1000);
 
 
     //Variables para memoria
@@ -183,10 +188,7 @@ io.sockets.on('connection', function(socket) {
     });
 
     //Leer cada segundo la energía eléctrica
-    setInterval(function() {
-        leerCFE();
-        leerPANEL();
-    }, 1000);
+
 
     //Funcion para recuperar los valores de los Relays almacenados en la base de datos
     //Posteriormente se emiten por socket.io a las vistas para cambiar los labels
