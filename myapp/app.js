@@ -160,6 +160,7 @@ io.sockets.on('connection', function(socket) {
     }
 
     function alimencacionUPS(signalCFE,signalPANEL){
+      
         if(signalCFE == true && signalPANEL == true){
           relay1.writeSync(1);
           relay2.writeSync(0);
