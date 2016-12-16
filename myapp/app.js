@@ -158,9 +158,6 @@ io.sockets.on('connection', function(socket) {
         console.log(leerPANEL());
     }, 1000);
 
-    console.log("valor 40 " + valueCFE);
-    console.log("valor 37 " + valuePANEL);
-
     //Variables para memoria
     var memTotal;
     var memUsed = 0;
