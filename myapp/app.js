@@ -145,6 +145,7 @@ io.sockets.on('connection', function(socket) {
           //console.log('The value 40 is ' + value); -->test
           return value;
       });
+      return value;
   }
 
   function leerPANEL() {
@@ -152,6 +153,7 @@ io.sockets.on('connection', function(socket) {
           //console.log('The value 37 is ' + value); -->test
           return value;
       });
+      return value;
   }
 
   console.log("valor PIN 40 "+gpio.setup(40, gpio.DIR_IN, leerCFE));
