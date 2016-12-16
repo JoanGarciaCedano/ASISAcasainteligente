@@ -107,7 +107,6 @@ var relay3 = new GPIOS(19, 'out'); //GPIO numero 19
 var relay4 = new GPIOS(20, 'out'); //GPIO numero 20
 
 //Funcion para recuperar el estado de los relevadores desde MongoDB
-/*
 var estadoRelay = function(db, callback) {
     var cursor = db.collection('raspberry').find();
 
@@ -115,8 +114,8 @@ var estadoRelay = function(db, callback) {
         assert.equal(err, null);
 
         if (doc != null) {
-            //relay1.writeSync(doc.statusCasa.relay1);
-            //relay2.writeSync(doc.statusCasa.relay2);
+            relay1.writeSync(doc.statusCasa.relay1);
+            relay2.writeSync(doc.statusCasa.relay2);
             relay3.writeSync(doc.statusCasa.relay3);
             relay4.writeSync(doc.statusCasa.relay4);
         } else {
@@ -132,8 +131,6 @@ MongoClient.connect(url, function(err, db) {
         db.close();
     });
 });
-*/
-
 
 var valorCFE = null;
 var valorPANEL = null;
@@ -164,8 +161,19 @@ io.sockets.on('connection', function(socket) {
 
     function alimencacionUPS(signalCFE,signalPANEL){
 
-        if(signalCFE == true){
+        if(signalCFE == true && signalPANEL == true){
           relay1.writeSync(1);
+          relay2.writeSync(0);
+        }else if(signalCFE == true && signalPANEL == false){
+          relay1.writeSync(1);
+          relay2.writeSync(0);
+        }else if(signalCFE == false && signalPANEL == true){
+          relay1.writeSync(0);
+          relay2.writeSync(1);
+        }else{
+          relay1.writeSync(0);
+          relay2.writeSync(0);
+          console.log("NO CUENTA CON ENERGÍA ELECTRICA");
         }
     }
 
@@ -210,14 +218,13 @@ io.sockets.on('connection', function(socket) {
 
     //Funcion para recuperar los valores de los Relays almacenados en la base de datos
     //Posteriormente se emiten por socket.io a las vistas para cambiar los labels
-/*
     var mandarRelay = function(db, callback) {
         var cursor = db.collection('raspberry').find();
         cursor.each(function(err, doc) {
             assert.equal(err, null);
             if (doc != null) {
-              //  socket.emit('statusRelay1', doc.statusCasa.relay1);
-              //  socket.emit('statusRelay2', doc.statusCasa.relay2);
+                socket.emit('statusRelay1', doc.statusCasa.relay1);
+                socket.emit('statusRelay2', doc.statusCasa.relay2);
                 socket.emit('statusRelay3', doc.statusCasa.relay3);
                 socket.emit('statusRelay4', doc.statusCasa.relay4);
             } else {
@@ -233,9 +240,8 @@ io.sockets.on('connection', function(socket) {
         });
     });
 
-
     //usa GPIO 17 para encender/apagar relay 1
-  /*  socket.on('relay1', function(data) {
+    socket.on('relay1', function(data) {
         console.log(data);
         if (data == 'on') {
             relay1.writeSync(1);
@@ -341,7 +347,7 @@ io.sockets.on('connection', function(socket) {
         }); //MongoClient
     }, 2000);
 
-*/
+
 
     // Funcion para revisar el estado de la memoria
     child = exec("egrep --color 'MemTotal' /proc/meminfo | egrep '[0-9.]{4,}' -o", function(error, stdout, stderr) {
