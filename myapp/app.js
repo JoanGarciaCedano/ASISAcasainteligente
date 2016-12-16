@@ -142,11 +142,11 @@ io.sockets.on('connection', function(socket) {
 
 
   function leerCFE() {
-      gpio.read(40, value);
+      gpio.read(40);
   }
 
   function leerPANEL() {
-      gpio.read(37, value);
+      gpio.read(37);
   }
 
   setInterval(function() {
