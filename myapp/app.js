@@ -159,10 +159,14 @@ io.sockets.on('connection', function(socket) {
         });
     }
 
+
     setInterval(function() {
       leerCFE();
       leerPANEL();
     }, 1000);
+
+    console.log("dato1 "+valorCFE);
+    console.log("dato2 "+valorPANEL);
 
     //Variables para memoria
     var memTotal;
