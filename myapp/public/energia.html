@@ -22,9 +22,9 @@
         var socket = io.connect();
         socket.on('statusCFE', function(value) {
             if (value == true) {
-                document.getElementById("energiaCFE").innerHTML = '<span class="label label-success">Energía Activa</span>"';
+                document.getElementById("energiaCFE").innerHTML = '<span class="label label-success">Energía Activa</span>';
             } else {
-                document.getElementById("energiaCFE").innerHTML = '<span class="label label-danger">Energía Inactiva</span>"';
+                document.getElementById("energiaCFE").innerHTML = '<span class="label label-danger">Energía Inactiva</span>';
             }
         });
     </script>
