@@ -132,6 +132,8 @@ MongoClient.connect(url, function(err, db) {
     });
 });
 
+var pedo1 = 0;
+var pedo2 = 0;
 
 //Establecemos una conexión cuando se abra el navegador
 io.sockets.on('connection', function(socket) {
@@ -143,24 +145,16 @@ io.sockets.on('connection', function(socket) {
 
     function leerCFE() {
         gpio.read(40, function(err, value) {
-          return value;
+          var pedo1 = value;
+          return pedo1;
         });
-        if(value == true){
-          return true;
-        }else {
-          return false;
-        }
     }
 
     function leerPANEL() {
         gpio.read(37, function(err, value) {
-            return value;
+          var pedo2 = value;
+            return pedo2;
         });
-        if(value == true){
-          return true;
-        }else {
-          return false;
-        }
     }
 
     setInterval(function() {
