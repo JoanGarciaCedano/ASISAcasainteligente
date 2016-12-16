@@ -166,15 +166,12 @@ io.sockets.on('connection', function(socket) {
 
         if(signalCFE == true && signalPANEL == true){
           relay1.writeSync(1);
-          relay2.writeSync(0);
         }
         if(signalCFE == true && signalPANEL == false){
           relay1.writeSync(1);
-          relay2.writeSync(0);
         }
         if(signalCFE == false && signalPANEL == true){
           relay1.writeSync(0);
-          relay2.writeSync(1);
         }else{
           relay1.writeSync(0);
           relay2.writeSync(0);
