@@ -136,33 +136,30 @@ MongoClient.connect(url, function(err, db) {
 //Establecemos una conexión cuando se abra el navegador
 io.sockets.on('connection', function(socket) {
 
-  //Lectura de Energía Electrica
-  gpio.setup(40, gpio.DIR_IN,leerCFE);
-  gpio.setup(37, gpio.DIR_IN,leerPANEL);
+    //Lectura de Energía Electrica
+    gpio.setup(40, gpio.DIR_IN, leerCFE);
+    gpio.setup(37, gpio.DIR_IN, leerPANEL);
 
 
-  function leerCFE() {
-      gpio.read(40, function(err, value) {
-      socket.emit("statusCFE", value);
-      });
-  }
+    function leerCFE() {
+        gpio.read(40, function(err, value) {
+            callback(value);
+        });
+    }
 
-  function leerPANEL() {
-      gpio.read(37, function(err, value) {
-      socket.emit("statusPANEL", value);
-      });
-  }
+    function leerPANEL() {
+        gpio.read(37, function(err, value) {
+            callback(value);
+        });
+    }
 
-  setInterval(function() {
-      leerCFE();
-      leerPANEL();
-  }, 1000);
+    setInterval(function() {
+        console.log(leerCFE());
+        console.log(leerPANEL());
+    }, 1000);
 
-  valueCFE = socket.on("statusCFE", value);
-  valuePANEL = socket.on("statusPANEL", value);
-
-  console.log("valor 40 "+valueCFE);
-  console.log("valor 37 "+valuePANEL);
+    console.log("valor 40 " + valueCFE);
+    console.log("valor 37 " + valuePANEL);
 
     //Variables para memoria
     var memTotal;
