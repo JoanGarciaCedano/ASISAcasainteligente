@@ -143,17 +143,13 @@ io.sockets.on('connection', function(socket) {
   function leerCFE() {
       gpio.read(40, function(err, value) {
           //console.log('The value 40 is ' + value); -->test
-          return value;
       });
-      return value;
   }
 
   function leerPANEL() {
       gpio.read(37, function(err, value) {
           //console.log('The value 37 is ' + value); -->test
-          return value;
       });
-      return value;
   }
 
   console.log("valor PIN 40 "+gpio.setup(40, gpio.DIR_IN, leerCFE));
