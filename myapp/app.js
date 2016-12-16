@@ -183,7 +183,7 @@ io.sockets.on('connection', function(socket) {
     setInterval(function() {
       leerCFE();
       leerPANEL();
-      //alimencacionUPS(valorCFE,valorPANEL);
+      alimencacionUPS(valorCFE,valorPANEL);
     }, 1000);
 
 
