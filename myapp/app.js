@@ -137,15 +137,7 @@ io.sockets.on('connection', function(socket) {
 
     //Lectura de Energía Electrica
     gpio.setup(33, gpio.DIR_IN, leerCFE);
-
-    gpio.setup(31, gpio.DIR_OUT, write);
-
-    function write() {
-        gpio.write(31, true, function(err) {
-            if (err) throw err;
-            console.log('Written to pin');
-        });
-    }
+    gpio.setup(31, gpio.DIR_IN, leerPANEL);
 
 
     function leerCFE() {
@@ -157,14 +149,14 @@ io.sockets.on('connection', function(socket) {
         });
     }
 
-    /*function leerPANEL() {
-        gpio.read(33, function(err, value) {
+    function leerPANEL() {
+        gpio.read(31, function(err, value) {
           valorPANEL = value;
           socket.emit("statusPANEL", value);
           console.log("PANEL: "+valorPANEL);
           return valorPANEL;
         });
-    }*/
+    }
 
     function alimencacionUPS(signalCFE,signalPANEL){
 
