@@ -162,8 +162,8 @@ io.sockets.on('connection', function(socket) {
     }
 
     setInterval(function() {
-        console.log(leerCFE());
-        console.log(leerPANEL());
+        console.log(leerCFE);
+        console.log(leerPANEL);
     }, 1000);
 
     //Variables para memoria
