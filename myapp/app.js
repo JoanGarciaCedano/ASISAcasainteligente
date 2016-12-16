@@ -141,14 +141,12 @@ io.sockets.on('connection', function(socket) {
       gpio.setup(40, gpio.DIR_IN);
 
       gpio.read(40, function(err, value) {
-        return value;
         console.log(value);
       });
 
       gpio.setup(37, gpio.DIR_IN);
 
       gpio.read(37, function(err, value) {
-          return value;
           console.log(value);
       });
 
