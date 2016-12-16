@@ -145,7 +145,7 @@ io.sockets.on('connection', function(socket) {
   }
 
   function leerPANEL() {
-      gpio.read  gpio.setup(37, gpio.DIR_IN), function(err, value) {
+      gpio.read(gpio.setup(37, gpio.DIR_IN), function(err, value) {
           return value;
           console.log(value);
       });
