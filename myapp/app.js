@@ -152,8 +152,8 @@ io.sockets.on('connection', function(socket) {
       });
   }
 
-gpio.setup(40, gpio.DIR_IN, leerCFE);
-gpio.setup(37, gpio.DIR_IN, leerPANEL);
+console.log(gpio.setup(40, gpio.DIR_IN, leerCFE));
+console.log(gpio.setup(37, gpio.DIR_IN, leerPANEL));
 
 
 
