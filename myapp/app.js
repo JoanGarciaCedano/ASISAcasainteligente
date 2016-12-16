@@ -132,29 +132,30 @@ MongoClient.connect(url, function(err, db) {
     });
 });
 
-//Lectura de Energía Electrica
-gpio.setup(40, gpio.DIR_IN, leerCFE);
-gpio.setup(37, gpio.DIR_IN, leerPANEL);
-
-function leerCFE() {
-    gpio.read(40, function(err, value) {
-        //console.log('The value 40 is ' + value); -->test
-        return value;
-    });
-}
-
-function leerPANEL() {
-    gpio.read(37, function(err, value) {
-        //console.log('The value 37 is ' + value); -->test
-        return value;
-    });
-}
-
-var valorCFE = leerCFE();
-var valorPANEL = leerPANEL();
 
 //Establecemos una conexión cuando se abra el navegador
 io.sockets.on('connection', function(socket) {
+
+  //Lectura de Energía Electrica
+  gpio.setup(40, gpio.DIR_IN, leerCFE);
+  gpio.setup(37, gpio.DIR_IN, leerPANEL);
+
+  function leerCFE() {
+      gpio.read(40, function(err, value) {
+          //console.log('The value 40 is ' + value); -->test
+          return value;
+      });
+  }
+
+  function leerPANEL() {
+      gpio.read(37, function(err, value) {
+          //console.log('The value 37 is ' + value); -->test
+          return value;
+      });
+  }
+
+  var valorCFE = leerCFE();
+  var valorPANEL = leerPANEL();
 
   socket.emit('statusCFE', valorCFE);
   socket.emit('statusPANEL', valorPANEL);
