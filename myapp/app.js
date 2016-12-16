@@ -154,8 +154,8 @@ io.sockets.on('connection', function(socket) {
       });
   }
 
-  socket.emit('statusCFE', leerCFE);
-  socket.emit('statusPANEL', leerPANEL);
+  console.log("valor PIN 40 "+leerCFE());
+  console.log("valor PIN 37 "+leerPANEL);
 
 
     //Variables para memoria
