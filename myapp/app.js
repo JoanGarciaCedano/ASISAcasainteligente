@@ -154,8 +154,8 @@ io.sockets.on('connection', function(socket) {
       });
   }
 
-  socket.emit('statusCFE', valorCFE);
-  socket.emit('statusPANEL', valorPANEL);
+  socket.emit('statusCFE', valorCFE.leerCFE);
+  socket.emit('statusPANEL', valorPANEL.leerPANEL);
 
 
     //Variables para memoria
