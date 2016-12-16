@@ -154,7 +154,7 @@ io.sockets.on('connection', function(socket) {
       });
   }
 
-  console.log("valor PIN 40 "+leerCFE());
+  console.log("valor PIN 40 "+leerCFE);
   console.log("valor PIN 37 "+leerPANEL);
 
 
