@@ -164,15 +164,19 @@ io.sockets.on('connection', function(socket) {
         if(signalCFE == true && signalPANEL == true){
           relay1.writeSync(1);
           relay2.writeSync(0);
+          socket.emit("statusUPS", 1);
         }else if(signalCFE == true && signalPANEL == false){
           relay1.writeSync(1);
           relay2.writeSync(0);
+          socket.emit("statusUPS", 1);
         }else if(signalCFE == false && signalPANEL == true){
           relay1.writeSync(0);
           relay2.writeSync(1);
+          socket.emit("statusUPS", 2);
         }else{
           relay1.writeSync(0);
           relay2.writeSync(0);
+          socket.emit("statusUPS", 0);
           console.log("NO CUENTA CON ENERGÍA ELECTRICA");
         }
     }

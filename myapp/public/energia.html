@@ -35,6 +35,22 @@
                 document.getElementById("energiaPANEL").innerHTML = '<span class="label label-danger">Energía Inactiva</span>';
             }
         });
+
+        socket.on('statusUPS', function(value) {
+            if (value == true) {
+                document.getElementById("energiaUPS1").innerHTML = '<span class="label label-success">Energía Activa</span>';
+            } else {
+                document.getElementById("energiaUPS1").innerHTML = '<span class="label label-danger">Energía Inactiva</span>';
+            }
+        });
+
+        socket.on('statusUPS', function(value) {
+            if (value == true) {
+                document.getElementById("energiaUPS2").innerHTML = '<span class="label label-success">Energía Activa</span>';
+            } else {
+                document.getElementById("energiaUPS2").innerHTML = '<span class="label label-danger">Energía Inactiva</span>';
+            }
+        });
     </script>
 
 </head>
@@ -147,7 +163,7 @@
                         </div>
                         <div class="thumbnail col-md-3">
                             <center><h3>Alimentando UPS?</h3></center>
-                            <center><h1><span class="label label-default">Esperando dato</span></h1></center>
+                            <center><h1 id="energiaUPS1"><span class="label label-default">Esperando dato</span></h1></center>
                         </div>
                     </div>
 
@@ -168,7 +184,7 @@
                         </div>
                         <div class="thumbnail col-md-3">
                             <center><h3>Alimentando UPS?</h3></center>
-                            <center><h1><span class="label label-default">Esperando dato</span></h1></center>
+                            <center><h1 id="energiaUPS2"><span class="label label-default">Esperando dato</span></h1></center>
                         </div>
                     </div>
                 </div>
