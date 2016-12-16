@@ -45,14 +45,14 @@
 
         socket.on('statusUPS', function(value) {
             if (value == 2) {
-                document.getElementById("energiaUPS2").innerHTML = '<span class="label label-default">Esperando dato</span>';
+                document.getElementById("energiaUPS1").innerHTML = '<span class="label label-default">Esperando dato</span>';
                 document.getElementById("energiaUPS2").innerHTML = '<span class="label label-success">Alimentando UPS</span>';
             }
         });
 
         socket.on('statusUPS', function(value) {
             if (value == 0) {
-                document.getElementById("energiaUPS2").innerHTML = '<span class="label label-default">Esperando dato</span>';
+                document.getElementById("energiaUPS1").innerHTML = '<span class="label label-default">Esperando dato</span>';
                 document.getElementById("energiaUPS2").innerHTML = '<span class="label label-default">Esperando dato</span>';
             }
         });
