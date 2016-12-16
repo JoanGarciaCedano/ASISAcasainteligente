@@ -143,13 +143,21 @@ io.sockets.on('connection', function(socket) {
 
     function leerCFE() {
         gpio.read(40, function(err, value) {
-            callback(value);
+            if(value == true){
+              return true;
+            }else{
+              return false;
+            }
         });
     }
 
     function leerPANEL() {
         gpio.read(37, function(err, value) {
-            callback(value);
+            if(value == true){
+              return true;
+            }else{
+              return false;
+            }
         });
     }
 
