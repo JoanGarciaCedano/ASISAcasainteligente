@@ -166,7 +166,7 @@ io.sockets.on('connection', function(socket) {
 
         if(signalCFE == true){
           relay1.writeSync(1);
-
+        }
     }
 
     setInterval(function() {
