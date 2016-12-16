@@ -143,27 +143,29 @@ io.sockets.on('connection', function(socket) {
 
     function leerCFE() {
         gpio.read(40, function(err, value) {
-            if(value == true){
-              return true;
-            }else{
-              return false;
-            }
+          return value;
         });
+        if(value == true){
+          return true;
+        }else {
+          return false;
+        }
     }
 
     function leerPANEL() {
         gpio.read(37, function(err, value) {
-            if(value == true){
-              return true;
-            }else{
-              return false;
-            }
+            return value;
         });
+        if(value == true){
+          return true;
+        }else {
+          return false;
+        }
     }
 
     setInterval(function() {
-        console.log(leerCFE);
-        console.log(leerPANEL);
+        console.log(leerCFE());
+        console.log(leerPANEL());
     }, 1000);
 
     //Variables para memoria
