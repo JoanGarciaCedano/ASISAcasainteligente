@@ -107,7 +107,7 @@ var relay3 = new GPIOS(19, 'out'); //GPIO numero 19
 var relay4 = new GPIOS(20, 'out'); //GPIO numero 20
 
 //Funcion para recuperar el estado de los relevadores desde MongoDB
-/*var estadoRelay = function(db, callback) {
+var estadoRelay = function(db, callback) {
     var cursor = db.collection('raspberry').find();
 
     cursor.each(function(err, doc) {
@@ -131,7 +131,7 @@ MongoClient.connect(url, function(err, db) {
         db.close();
     });
 });
-*/
+
 
 var valorCFE = null;
 var valorPANEL = null;
@@ -187,7 +187,7 @@ io.sockets.on('connection', function(socket) {
     setInterval(function() {
       leerCFE();
       leerPANEL();
-      alimencacionUPS(valorCFE,valorPANEL);
+      //alimencacionUPS(valorCFE,valorPANEL);
     }, 1000);
 
 
