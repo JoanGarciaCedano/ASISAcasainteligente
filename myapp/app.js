@@ -153,13 +153,13 @@ io.sockets.on('connection', function(socket) {
           return;
       });
   }
-/*
+
   var valorCFE = leerCFE();
   var valorPANEL = leerPANEL();
 
   socket.emit('statusCFE', valorCFE);
   socket.emit('statusPANEL', valorPANEL);
-*/
+
 
     //Variables para memoria
     var memTotal;
