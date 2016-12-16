@@ -137,7 +137,7 @@ io.sockets.on('connection', function(socket) {
 
     //Lectura de Energía Electrica
     gpio.setup(36, gpio.DIR_IN, leerCFE);
-    gpio.setup(29, gpio.DIR_IN, leerPANEL);
+    gpio.setup(16, gpio.DIR_IN, leerPANEL);
 
 
     function leerCFE() {
@@ -150,7 +150,7 @@ io.sockets.on('connection', function(socket) {
     }
 
     function leerPANEL() {
-        gpio.read(29, function(err, value) {
+        gpio.read(16, function(err, value) {
           valorPANEL = value;
           socket.emit("statusPANEL", value);
           console.log("PANEL: "+valorPANEL);
