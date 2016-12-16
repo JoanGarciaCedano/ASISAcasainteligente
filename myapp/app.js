@@ -285,7 +285,7 @@ io.sockets.on('connection', function(socket) {
                 db.close();
             });
         }); //MongoClient
-    });*/
+    });
 
     //usa GPIO 19 para encender/apagar relay 3
     socket.on('relay3', function(data) {
@@ -353,8 +353,8 @@ io.sockets.on('connection', function(socket) {
             });
         }); //MongoClient
     }, 2000);
-*/
 
+*/
 
     // Funcion para revisar el estado de la memoria
     child = exec("egrep --color 'MemTotal' /proc/meminfo | egrep '[0-9.]{4,}' -o", function(error, stdout, stderr) {
