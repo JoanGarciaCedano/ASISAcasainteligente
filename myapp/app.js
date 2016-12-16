@@ -132,10 +132,6 @@ MongoClient.connect(url, function(err, db) {
     });
 });
 
-
-var valorCFE = null;
-var valorPANEL = null;
-
 //Establecemos una conexión cuando se abra el navegador
 io.sockets.on('connection', function(socket) {
 
