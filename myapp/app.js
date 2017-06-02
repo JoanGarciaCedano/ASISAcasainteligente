@@ -325,7 +325,8 @@ io.sockets.on('connection', function(socket) {
         }); //MongoClient
     });
 
-    // Function for measuring temperature
+
+/*
     setInterval(function() {
         //Modulo y variables para obtener la fecha, etc.
         var fecha = new Date();
@@ -351,7 +352,7 @@ io.sockets.on('connection', function(socket) {
             });
         }); //MongoClient
     }, 2000);
-
+*/
 
 
     // Funcion para revisar el estado de la memoria
