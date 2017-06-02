@@ -1,0 +1,25 @@
+Pin1: Funciona - 3.3v
+Pin2: Funciona - 5v
+Pin4: Funciona - 5v
+Pin6: Funciona - Ground
+Pin9: Funciona - Ground
+Pin14: Funciona - Ground
+Pin17: Funciona - 3.3v
+Pin20: Funciona - Ground
+Pin25: Funciona - Ground
+Pin27: Funciona - DNC
+Pin28: Funciona - DNC
+Pin30: Funciona - Ground
+Pin34: Funciona - Ground
+Pin39: Funciona - Ground
+
+Ocupados:
+1 -- 3.3
+2 -- 5v
+6 -- ground
+7 -- true FUNCIONA
+9 --ground
+10 
+11
+38
+35

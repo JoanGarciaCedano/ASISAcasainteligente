@@ -135,6 +135,8 @@ MongoClient.connect(url, function(err, db) {
 //Establecemos una conexión cuando se abra el navegador
 io.sockets.on('connection', function(socket) {
 
+
+/*
     //Lectura de Energía Electrica
     gpio.setup(36, gpio.DIR_IN, leerCFE);
     gpio.setup(16, gpio.DIR_IN, leerPANEL);
@@ -185,7 +187,7 @@ io.sockets.on('connection', function(socket) {
       leerPANEL();
       alimencacionUPS(valorCFE,valorPANEL);
     }, 1000);
-
+*/
 
 
     //Variables para memoria
